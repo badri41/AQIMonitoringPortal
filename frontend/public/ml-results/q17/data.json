@@ -1,0 +1,97 @@
+{
+  "query": "Q17",
+  "title": "Average Duration of Polluted Air Spells",
+  "ml_type": "Health Risk",
+  "results": [
+    {
+      "city": "Delhi",
+      "avg_spell_days": 6.2,
+      "total_spells": 88,
+      "max_spell": 57
+    },
+    {
+      "city": "Kolkata",
+      "avg_spell_days": 4.8,
+      "total_spells": 37,
+      "max_spell": 71
+    },
+    {
+      "city": "Lucknow",
+      "avg_spell_days": 4.6,
+      "total_spells": 48,
+      "max_spell": 84
+    },
+    {
+      "city": "Noida",
+      "avg_spell_days": 4.4,
+      "total_spells": 108,
+      "max_spell": 62
+    },
+    {
+      "city": "Chandigarh",
+      "avg_spell_days": 3.3,
+      "total_spells": 26,
+      "max_spell": 34
+    },
+    {
+      "city": "Guwahati",
+      "avg_spell_days": 3.3,
+      "total_spells": 41,
+      "max_spell": 19
+    },
+    {
+      "city": "Pune",
+      "avg_spell_days": 2.6,
+      "total_spells": 12,
+      "max_spell": 7
+    },
+    {
+      "city": "Bangalore",
+      "avg_spell_days": 2.0,
+      "total_spells": 1,
+      "max_spell": 2
+    },
+    {
+      "city": "Bhopal",
+      "avg_spell_days": 1.8,
+      "total_spells": 6,
+      "max_spell": 3
+    },
+    {
+      "city": "Ahmedabad",
+      "avg_spell_days": 1.7,
+      "total_spells": 19,
+      "max_spell": 6
+    },
+    {
+      "city": "Jaipur",
+      "avg_spell_days": 1.6,
+      "total_spells": 20,
+      "max_spell": 5
+    },
+    {
+      "city": "Indore",
+      "avg_spell_days": 1.5,
+      "total_spells": 6,
+      "max_spell": 3
+    },
+    {
+      "city": "Mumbai",
+      "avg_spell_days": 1.5,
+      "total_spells": 14,
+      "max_spell": 3
+    },
+    {
+      "city": "Chennai",
+      "avg_spell_days": 1.0,
+      "total_spells": 4,
+      "max_spell": 1
+    },
+    {
+      "city": "Hyderabad",
+      "avg_spell_days": 1.0,
+      "total_spells": 3,
+      "max_spell": 1
+    }
+  ]
+}

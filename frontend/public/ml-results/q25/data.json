@@ -1,0 +1,97 @@
+{
+  "query": "Q25",
+  "title": "CO & PM2.5 Co-occurrence in Winter",
+  "ml_type": "Co-occurrence Analysis",
+  "results": [
+    {
+      "city": "Delhi",
+      "total_winter_days": 659,
+      "co_pm_simultaneous": 214,
+      "rate": 32.47
+    },
+    {
+      "city": "Noida",
+      "total_winter_days": 659,
+      "co_pm_simultaneous": 200,
+      "rate": 30.35
+    },
+    {
+      "city": "Lucknow",
+      "total_winter_days": 659,
+      "co_pm_simultaneous": 70,
+      "rate": 10.62
+    },
+    {
+      "city": "Guwahati",
+      "total_winter_days": 659,
+      "co_pm_simultaneous": 53,
+      "rate": 8.04
+    },
+    {
+      "city": "Chandigarh",
+      "total_winter_days": 659,
+      "co_pm_simultaneous": 33,
+      "rate": 5.01
+    },
+    {
+      "city": "Kolkata",
+      "total_winter_days": 659,
+      "co_pm_simultaneous": 23,
+      "rate": 3.49
+    },
+    {
+      "city": "Mumbai",
+      "total_winter_days": 658,
+      "co_pm_simultaneous": 17,
+      "rate": 2.58
+    },
+    {
+      "city": "Indore",
+      "total_winter_days": 536,
+      "co_pm_simultaneous": 11,
+      "rate": 2.05
+    },
+    {
+      "city": "Ahmedabad",
+      "total_winter_days": 659,
+      "co_pm_simultaneous": 1,
+      "rate": 0.15
+    },
+    {
+      "city": "Jaipur",
+      "total_winter_days": 659,
+      "co_pm_simultaneous": 1,
+      "rate": 0.15
+    },
+    {
+      "city": "Pune",
+      "total_winter_days": 658,
+      "co_pm_simultaneous": 1,
+      "rate": 0.15
+    },
+    {
+      "city": "Bangalore",
+      "total_winter_days": 659,
+      "co_pm_simultaneous": 0,
+      "rate": 0.0
+    },
+    {
+      "city": "Bhopal",
+      "total_winter_days": 658,
+      "co_pm_simultaneous": 0,
+      "rate": 0.0
+    },
+    {
+      "city": "Chennai",
+      "total_winter_days": 659,
+      "co_pm_simultaneous": 0,
+      "rate": 0.0
+    },
+    {
+      "city": "Hyderabad",
+      "total_winter_days": 659,
+      "co_pm_simultaneous": 0,
+      "rate": 0.0
+    }
+  ]
+}

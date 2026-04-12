@@ -1,0 +1,99 @@
+{
+  "query": "Q2",
+  "title": "State AQI Improvement Over Years",
+  "ml_type": "Trend Forecast",
+  "improvements": [
+    {
+      "city": "Jaipur",
+      "latest_avg": 150.1,
+      "old_avg": 125.6,
+      "improvement": -24.4
+    },
+    {
+      "city": "Ahmedabad",
+      "latest_avg": 142.3,
+      "old_avg": 117.8,
+      "improvement": -24.6
+    },
+    {
+      "city": "Bhopal",
+      "latest_avg": 143.3,
+      "old_avg": 105.3,
+      "improvement": -38.0
+    },
+    {
+      "city": "Pune",
+      "latest_avg": 147.5,
+      "old_avg": 103.9,
+      "improvement": -43.6
+    },
+    {
+      "city": "Chandigarh",
+      "latest_avg": 175.8,
+      "old_avg": 128.8,
+      "improvement": -47.0
+    },
+    {
+      "city": "Delhi",
+      "latest_avg": 226.4,
+      "old_avg": 177.9,
+      "improvement": -48.4
+    },
+    {
+      "city": "Bangalore",
+      "latest_avg": 134.4,
+      "old_avg": 83.9,
+      "improvement": -50.5
+    },
+    {
+      "city": "Indore",
+      "latest_avg": 146.7,
+      "old_avg": 95.1,
+      "improvement": -51.6
+    },
+    {
+      "city": "Chennai",
+      "latest_avg": 134.2,
+      "old_avg": 82.3,
+      "improvement": -51.9
+    },
+    {
+      "city": "Hyderabad",
+      "latest_avg": 152.3,
+      "old_avg": 94.8,
+      "improvement": -57.5
+    },
+    {
+      "city": "Mumbai",
+      "latest_avg": 158.3,
+      "old_avg": 99.8,
+      "improvement": -58.5
+    },
+    {
+      "city": "Noida",
+      "latest_avg": 230.5,
+      "old_avg": 157.8,
+      "improvement": -72.7
+    },
+    {
+      "city": "Kolkata",
+      "latest_avg": 197.4,
+      "old_avg": 118.0,
+      "improvement": -79.4
+    },
+    {
+      "city": "Guwahati",
+      "latest_avg": 192.0,
+      "old_avg": 105.5,
+      "improvement": -86.6
+    },
+    {
+      "city": "Lucknow",
+      "latest_avg": 222.1,
+      "old_avg": 126.5,
+      "improvement": -95.7
+    }
+  ],
+  "best_improving": "Jaipur",
+  "worst_declining": "Lucknow"
+}

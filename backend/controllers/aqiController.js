@@ -153,8 +153,63 @@ async function getHistoricalAqi(req, res, next) {
   }
 }
 
+async function getQueryResult(req, res, next) {
+  const queryId = Number(req.params.id);
+  if (!Number.isInteger(queryId) || queryId < 1 || queryId > 30) {
+    return res.status(400).json({ error: "Query ID must be between 1 and 30." });
+  }
+
+  const queries = require("../queries/aqiQueries");
+
+  const queryMap = {
+    1: queries.getLongestSevereStreak,
+    2: queries.getStateImprovement,
+    3: queries.getAQIAnomalies,
+    4: queries.getPollutionHotspots,
+    5: queries.getConsistentlyGoodCities,
+    6: queries.getMonthlyAQI,
+    7: queries.getMonthlyPM25,
+    8: queries.getYearlyGrowth,
+    9: queries.getWorstMonthPerYear,
+    10: queries.getSeasonalPM25,
+    11: queries.getDominantPollutant,
+    12: queries.getPm25AqiCorrelation,
+    13: queries.getHiddenPollutionRisk,
+    14: queries.getWeekendVsWeekdayAQI,
+    15: queries.getAqiVolatilityFrequency,
+    16: queries.getUnpredictableCities,
+    17: queries.getPollutedAirSpells,
+    18: queries.getRainfallImpact,
+    19: queries.getRecoverySpeed,
+    20: queries.getRegionalPollutionProfile,
+    21: queries.getWinterOnset,
+    22: queries.getStatePercentiles,
+    23: queries.getSeasonalOzoneVariation,
+    24: queries.getTrafficPollution,
+    25: queries.getCoPmCooccurrence,
+    26: queries.getHiddenHazardDays,
+    27: queries.getRecoveryTime,
+    28: queries.getEarlyWarningSignal,
+    29: queries.getSeasonalDrop,
+    30: queries.getPollutionClusters,
+  };
+
+  const executor = queryMap[queryId];
+  if (!executor) {
+    return res.status(404).json({ error: `Query Q${queryId} not implemented.` });
+  }
+
+  try {
+    const rows = await executor();
+    return res.json(rows);
+  } catch (error) {
+    return next(error);
+  }
+}
+
 module.exports = {
   getDailyAqi,
   getOverviewAqi,
   getHistoricalAqi,
+  getQueryResult,
 };

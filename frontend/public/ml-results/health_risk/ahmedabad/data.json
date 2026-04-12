@@ -1,0 +1,27 @@
+{
+  "city": "Ahmedabad",
+  "model": "Rule-Based (NAQI India)",
+  "health_score": 1.74,
+  "max_possible_score": 10,
+  "risk_tier": "Moderate Risk",
+  "advisory": "Sensitive groups (children, elderly, asthma) should limit prolonged outdoor activity.",
+  "total_days_analyzed": 1891,
+  "category_breakdown": {
+    "Good": {
+      "days": 5,
+      "percentage": 0.3
+    },
+    "Satisfactory": {
+      "days": 551,
+      "percentage": 29.1
+    },
+    "Moderate": {
+      "days": 1302,
+      "percentage": 68.9
+    },
+    "Poor": {
+      "days": 33,
+      "percentage": 1.7
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "city": "Chandigarh",
+  "model": "Rule-Based (NAQI India)",
+  "health_score": 1.77,
+  "max_possible_score": 10,
+  "risk_tier": "Moderate Risk",
+  "advisory": "Sensitive groups (children, elderly, asthma) should limit prolonged outdoor activity.",
+  "total_days_analyzed": 1892,
+  "category_breakdown": {
+    "Good": {
+      "days": 24,
+      "percentage": 1.3
+    },
+    "Satisfactory": {
+      "days": 593,
+      "percentage": 31.3
+    },
+    "Moderate": {
+      "days": 1188,
+      "percentage": 62.8
+    },
+    "Poor": {
+      "days": 76,
+      "percentage": 4.0
+    },
+    "Very Poor": {
+      "days": 11,
+      "percentage": 0.6
+    }
+  }
+}

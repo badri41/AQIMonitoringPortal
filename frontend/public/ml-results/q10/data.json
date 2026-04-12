@@ -1,0 +1,37 @@
+{
+  "query": "Q10",
+  "title": "Summer vs Winter PM2.5 (North India)",
+  "ml_type": "Seasonal Analysis",
+  "seasonal_data": [
+    {
+      "city": "Chandigarh",
+      "winter_pm25": 89.3,
+      "summer_pm25": 42.7,
+      "ratio": 2.09
+    },
+    {
+      "city": "Delhi",
+      "winter_pm25": 165.3,
+      "summer_pm25": 62.5,
+      "ratio": 2.65
+    },
+    {
+      "city": "Jaipur",
+      "winter_pm25": 68.0,
+      "summer_pm25": 50.5,
+      "ratio": 1.35
+    },
+    {
+      "city": "Lucknow",
+      "winter_pm25": 110.1,
+      "summer_pm25": 56.1,
+      "ratio": 1.96
+    },
+    {
+      "city": "Noida",
+      "winter_pm25": 154.9,
+      "summer_pm25": 56.9,
+      "ratio": 2.72
+    }
+  ]
+}

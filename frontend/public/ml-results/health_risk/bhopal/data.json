@@ -1,0 +1,27 @@
+{
+  "city": "Bhopal",
+  "model": "Rule-Based (NAQI India)",
+  "health_score": 1.52,
+  "max_possible_score": 10,
+  "risk_tier": "Moderate Risk",
+  "advisory": "Sensitive groups (children, elderly, asthma) should limit prolonged outdoor activity.",
+  "total_days_analyzed": 1891,
+  "category_breakdown": {
+    "Good": {
+      "days": 60,
+      "percentage": 3.2
+    },
+    "Satisfactory": {
+      "days": 818,
+      "percentage": 43.3
+    },
+    "Moderate": {
+      "days": 1002,
+      "percentage": 53.0
+    },
+    "Poor": {
+      "days": 11,
+      "percentage": 0.6
+    }
+  }
+}

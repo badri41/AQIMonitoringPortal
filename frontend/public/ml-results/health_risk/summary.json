@@ -1,0 +1,79 @@
+{
+  "cities": [
+    {
+      "city": "Delhi",
+      "health_score": 2.68,
+      "risk_tier": "Moderate Risk"
+    },
+    {
+      "city": "Noida",
+      "health_score": 2.54,
+      "risk_tier": "Moderate Risk"
+    },
+    {
+      "city": "Lucknow",
+      "health_score": 2.06,
+      "risk_tier": "Moderate Risk"
+    },
+    {
+      "city": "Chandigarh",
+      "health_score": 1.77,
+      "risk_tier": "Moderate Risk"
+    },
+    {
+      "city": "Jaipur",
+      "health_score": 1.76,
+      "risk_tier": "Moderate Risk"
+    },
+    {
+      "city": "Ahmedabad",
+      "health_score": 1.74,
+      "risk_tier": "Moderate Risk"
+    },
+    {
+      "city": "Kolkata",
+      "health_score": 1.71,
+      "risk_tier": "Moderate Risk"
+    },
+    {
+      "city": "Guwahati",
+      "health_score": 1.64,
+      "risk_tier": "Moderate Risk"
+    },
+    {
+      "city": "Indore",
+      "health_score": 1.59,
+      "risk_tier": "Moderate Risk"
+    },
+    {
+      "city": "Bhopal",
+      "health_score": 1.52,
+      "risk_tier": "Moderate Risk"
+    },
+    {
+      "city": "Pune",
+      "health_score": 1.52,
+      "risk_tier": "Moderate Risk"
+    },
+    {
+      "city": "Mumbai",
+      "health_score": 1.49,
+      "risk_tier": "Moderate Risk"
+    },
+    {
+      "city": "Hyderabad",
+      "health_score": 1.45,
+      "risk_tier": "Moderate Risk"
+    },
+    {
+      "city": "Chennai",
+      "health_score": 1.25,
+      "risk_tier": "Moderate Risk"
+    },
+    {
+      "city": "Bangalore",
+      "health_score": 1.24,
+      "risk_tier": "Moderate Risk"
+    }
+  ]
+}

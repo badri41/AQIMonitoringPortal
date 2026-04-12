@@ -1,0 +1,83 @@
+{
+  "query": "Q16",
+  "title": "Most Unpredictable AQI Cities",
+  "ml_type": "Clustering",
+  "most_unpredictable": "Noida",
+  "results": [
+    {
+      "city": "Noida",
+      "std_aqi": 84.08,
+      "mean_aqi": 165.35
+    },
+    {
+      "city": "Delhi",
+      "std_aqi": 82.84,
+      "mean_aqi": 173.71
+    },
+    {
+      "city": "Lucknow",
+      "std_aqi": 60.87,
+      "mean_aqi": 143.24
+    },
+    {
+      "city": "Kolkata",
+      "std_aqi": 58.91,
+      "mean_aqi": 123.85
+    },
+    {
+      "city": "Guwahati",
+      "std_aqi": 55.09,
+      "mean_aqi": 117.76
+    },
+    {
+      "city": "Chandigarh",
+      "std_aqi": 45.41,
+      "mean_aqi": 126.02
+    },
+    {
+      "city": "Mumbai",
+      "std_aqi": 44.42,
+      "mean_aqi": 111.04
+    },
+    {
+      "city": "Pune",
+      "std_aqi": 43.03,
+      "mean_aqi": 109.05
+    },
+    {
+      "city": "Bhopal",
+      "std_aqi": 36.6,
+      "mean_aqi": 107.81
+    },
+    {
+      "city": "Indore",
+      "std_aqi": 35.72,
+      "mean_aqi": 111.88
+    },
+    {
+      "city": "Jaipur",
+      "std_aqi": 35.24,
+      "mean_aqi": 124.75
+    },
+    {
+      "city": "Hyderabad",
+      "std_aqi": 34.92,
+      "mean_aqi": 102.89
+    },
+    {
+      "city": "Ahmedabad",
+      "std_aqi": 33.18,
+      "mean_aqi": 122.62
+    },
+    {
+      "city": "Chennai",
+      "std_aqi": 31.29,
+      "mean_aqi": 89.68
+    },
+    {
+      "city": "Bangalore",
+      "std_aqi": 29.1,
+      "mean_aqi": 86.72
+    }
+  ]
+}

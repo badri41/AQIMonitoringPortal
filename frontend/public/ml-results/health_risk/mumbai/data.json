@@ -1,0 +1,27 @@
+{
+  "city": "Mumbai",
+  "model": "Rule-Based (NAQI India)",
+  "health_score": 1.49,
+  "max_possible_score": 10,
+  "risk_tier": "Moderate Risk",
+  "advisory": "Sensitive groups (children, elderly, asthma) should limit prolonged outdoor activity.",
+  "total_days_analyzed": 1891,
+  "category_breakdown": {
+    "Good": {
+      "days": 98,
+      "percentage": 5.2
+    },
+    "Satisfactory": {
+      "days": 817,
+      "percentage": 43.2
+    },
+    "Moderate": {
+      "days": 955,
+      "percentage": 50.5
+    },
+    "Poor": {
+      "days": 21,
+      "percentage": 1.1
+    }
+  }
+}

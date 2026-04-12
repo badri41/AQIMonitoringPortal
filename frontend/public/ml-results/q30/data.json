@@ -1,0 +1,31 @@
+{
+  "query": "Q30",
+  "title": "Severe AQI Burst Cluster Analysis",
+  "ml_type": "Burst Analysis",
+  "results": [
+    {
+      "city": "Noida",
+      "longest_cluster": 7,
+      "total_clusters": 16,
+      "avg_cluster": 2.9
+    },
+    {
+      "city": "Delhi",
+      "longest_cluster": 6,
+      "total_clusters": 11,
+      "avg_cluster": 2.9
+    },
+    {
+      "city": "Lucknow",
+      "longest_cluster": 4,
+      "total_clusters": 4,
+      "avg_cluster": 2.8
+    },
+    {
+      "city": "Guwahati",
+      "longest_cluster": 1,
+      "total_clusters": 1,
+      "avg_cluster": 1.0
+    }
+  ]
+}

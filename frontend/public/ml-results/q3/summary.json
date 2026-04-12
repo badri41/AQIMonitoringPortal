@@ -1,0 +1,79 @@
+{
+  "cities": [
+    {
+      "city": "Ahmedabad",
+      "anomaly_rate": 5.02,
+      "anomalies_detected": 95
+    },
+    {
+      "city": "Bhopal",
+      "anomaly_rate": 5.02,
+      "anomalies_detected": 95
+    },
+    {
+      "city": "Chandigarh",
+      "anomaly_rate": 5.02,
+      "anomalies_detected": 95
+    },
+    {
+      "city": "Chennai",
+      "anomaly_rate": 5.02,
+      "anomalies_detected": 95
+    },
+    {
+      "city": "Delhi",
+      "anomaly_rate": 5.02,
+      "anomalies_detected": 95
+    },
+    {
+      "city": "Guwahati",
+      "anomaly_rate": 5.02,
+      "anomalies_detected": 95
+    },
+    {
+      "city": "Hyderabad",
+      "anomaly_rate": 5.02,
+      "anomalies_detected": 95
+    },
+    {
+      "city": "Jaipur",
+      "anomaly_rate": 5.02,
+      "anomalies_detected": 95
+    },
+    {
+      "city": "Kolkata",
+      "anomaly_rate": 5.02,
+      "anomalies_detected": 95
+    },
+    {
+      "city": "Lucknow",
+      "anomaly_rate": 5.02,
+      "anomalies_detected": 95
+    },
+    {
+      "city": "Mumbai",
+      "anomaly_rate": 5.02,
+      "anomalies_detected": 95
+    },
+    {
+      "city": "Noida",
+      "anomaly_rate": 5.02,
+      "anomalies_detected": 95
+    },
+    {
+      "city": "Bangalore",
+      "anomaly_rate": 5.01,
+      "anomalies_detected": 95
+    },
+    {
+      "city": "Indore",
+      "anomaly_rate": 5.0,
+      "anomalies_detected": 76
+    },
+    {
+      "city": "Pune",
+      "anomaly_rate": 4.66,
+      "anomalies_detected": 88
+    }
+  ]
+}

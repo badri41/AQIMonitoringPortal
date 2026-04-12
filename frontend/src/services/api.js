@@ -54,3 +54,8 @@ export function fetchHistoricalAqi({ cityId, month }) {
     month: Number(month) + 1,
   });
 }
+
+export function fetchQueryResult(queryId) {
+  return request(`/aqi/query/${queryId}`);
+}
+

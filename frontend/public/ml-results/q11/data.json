@@ -1,0 +1,97 @@
+{
+  "query": "Q11",
+  "title": "Dominant Pollutant per City (PM2.5 vs PM10)",
+  "ml_type": "Correlation Clustering",
+  "results": [
+    {
+      "city": "Ahmedabad",
+      "corr_pm25": 0.9408,
+      "corr_pm10": 0.8554,
+      "dominant": "PM2.5"
+    },
+    {
+      "city": "Bangalore",
+      "corr_pm25": 0.9381,
+      "corr_pm10": 0.6612,
+      "dominant": "PM2.5"
+    },
+    {
+      "city": "Bhopal",
+      "corr_pm25": 0.953,
+      "corr_pm10": 0.8463,
+      "dominant": "PM2.5"
+    },
+    {
+      "city": "Chandigarh",
+      "corr_pm25": 0.9634,
+      "corr_pm10": 0.9179,
+      "dominant": "PM2.5"
+    },
+    {
+      "city": "Chennai",
+      "corr_pm25": 0.9021,
+      "corr_pm10": 0.8347,
+      "dominant": "PM2.5"
+    },
+    {
+      "city": "Delhi",
+      "corr_pm25": 0.9397,
+      "corr_pm10": 0.9005,
+      "dominant": "PM2.5"
+    },
+    {
+      "city": "Guwahati",
+      "corr_pm25": 0.9545,
+      "corr_pm10": 0.9331,
+      "dominant": "PM2.5"
+    },
+    {
+      "city": "Hyderabad",
+      "corr_pm25": 0.9697,
+      "corr_pm10": 0.7879,
+      "dominant": "PM2.5"
+    },
+    {
+      "city": "Indore",
+      "corr_pm25": 0.9384,
+      "corr_pm10": 0.7222,
+      "dominant": "PM2.5"
+    },
+    {
+      "city": "Jaipur",
+      "corr_pm25": 0.9528,
+      "corr_pm10": 0.8629,
+      "dominant": "PM2.5"
+    },
+    {
+      "city": "Kolkata",
+      "corr_pm25": 0.9641,
+      "corr_pm10": 0.9525,
+      "dominant": "PM2.5"
+    },
+    {
+      "city": "Lucknow",
+      "corr_pm25": 0.9535,
+      "corr_pm10": 0.918,
+      "dominant": "PM2.5"
+    },
+    {
+      "city": "Mumbai",
+      "corr_pm25": 0.868,
+      "corr_pm10": 0.8385,
+      "dominant": "PM2.5"
+    },
+    {
+      "city": "Noida",
+      "corr_pm25": 0.8814,
+      "corr_pm10": 0.8438,
+      "dominant": "PM2.5"
+    },
+    {
+      "city": "Pune",
+      "corr_pm25": 0.8867,
+      "corr_pm10": 0.7253,
+      "dominant": "PM2.5"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "city": "Bangalore",
+  "model": "Rule-Based (NAQI India)",
+  "health_score": 1.24,
+  "max_possible_score": 10,
+  "risk_tier": "Moderate Risk",
+  "advisory": "Sensitive groups (children, elderly, asthma) should limit prolonged outdoor activity.",
+  "total_days_analyzed": 1896,
+  "category_breakdown": {
+    "Good": {
+      "days": 131,
+      "percentage": 6.9
+    },
+    "Satisfactory": {
+      "days": 1180,
+      "percentage": 62.2
+    },
+    "Moderate": {
+      "days": 583,
+      "percentage": 30.7
+    },
+    "Poor": {
+      "days": 2,
+      "percentage": 0.1
+    }
+  }
+}

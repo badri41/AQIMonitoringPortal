@@ -1,4 +1,4 @@
-# AQI Monitoring Portal
+# AQI Monitoring Portal & Research Engine
 
 **DBMS Project**
 
@@ -18,119 +18,105 @@
 
 ## 📌 1. Introduction
 
-This project aims to develop a web portal for exploring historical Air Quality Index (AQI) and pollution data across major Indian cities (2021–2026). The platform enables users to visualize trends, analyze pollution levels, and compare air quality across cities.
-
-The system uses historical data and focuses on visualization and analytical insights. Future enhancements include AQI prediction using machine learning models.
-
----
-
-## 🧩 2. System Overview
-
-### Frontend
-
-* Built using React.js for dynamic UI
-* Interactive charts and visualizations
-* Responsive design
-
-### Backend
-
-* Node.js and Express.js for API handling
-* Data processing and request management
-
-### Database
-
-* MariaDB for structured storage
-* Optimized queries for efficient data retrieval
+This project aims to develop a web portal for exploring historical Air Quality Index (AQI) and pollution data across major Indian cities (2021–2026). The platform features:
+1. **Interactive Dashboard View:** To visualize trends, analyze daily/monthly pollution levels, and compare air quality across cities instantly.
+2. **Research Query Engine:** A built-in query system that pairs 30 complex analytical queries from a MariaDB database alongside pre-computed Machine Learning insights and data forecasts.
 
 ---
 
-## 🌆 3. Cities Covered (Subject to Change)
+## 🧩 2. System Architecture
+
+### Frontend (React + Vite)
+* Built using React.js for extremely fast UI updates.
+* Uses Chart.js for data visualizations.
+* Unified dual-panel structure bridging SQL and Machine Learning outputs visually.
+
+### Backend (Node.js + Express)
+* Provides API handler loops.
+* Resolves dynamic SQL parameter injections seamlessly.
+* Handles MariaDB `BigInt` responses to safely serialize aggregative statistical models (`COUNT()`, `PERCENTILE_CONT()`).
+
+### Database (MariaDB)
+* Relational structure linking Cities and Daily AQI entries natively.
+* Incorporates Window Functions, Subqueries, Correlation routines, and clustering via highly optimized query formulations (`aqiQueries.js`).
+
+### Machine Learning Pipeline (Python)
+* Orchestrates data using `tensorflow` for LSTMs, `scikit-learn` for Isolation Forests & K-Means Clustering, and `statsmodels` for cyclic seasonal projections.
+* Generates static outputs (PNG plots and JSON) stored in the `frontend/public/ml-results` directory entirely offline.
+
+---
+
+## 🌆 3. Cities Covered
 
 Delhi, Mumbai, Kolkata, Chennai, Bengaluru, Hyderabad, Ahmedabad, Pune, Jaipur, Lucknow, Chandigarh, Bhopal, Indore, Noida, Guwahati
 
 ---
 
-## 📚 4. Resources
+## 🚀 4. Full System Setup & Execution Guide
 
-* CPCB AQI India Portal
-* CPCB AQI Repository
+Follow these steps exactly in order to launch the full system locally. 
 
----
+### Step 1: Database Setup (MariaDB)
 
-## 🤖 5. Enhancements Using Machine Learning
+1. **Install MariaDB** Server.
+2. Ensure the CSV files are located inside the `/data` folder.
+3. Open your Command Prompt/Terminal and navigate to this project's root folder.
+4. Launch the MariaDB Client:
+   `"C:\Program Files\MariaDB 12.2\bin\mysql.exe" -u root -p`
+5. Enable local infile (necessary for bulk CSV loading):
+   `SET GLOBAL local_infile = 1;`
+6. Run the Schema layout:
+   `SOURCE database/schema.sql;`
+7. Run the Seed loader:
+   `SOURCE database/seed.sql;`
 
-* AQI prediction using LSTM models
-* Pollution trend analysis (long-term patterns)
-* Anomaly detection for sudden spikes
-* City clustering based on AQI patterns
-* Health risk estimation (rule-based)
+### Step 2: Configure & Run the Backend
+1. Navigate to the backend directory:
+   ```bash
+   cd backend
+   ```
+2. Create an environment file (`.env`) in the `backend/` folder and add your database configuration:
+   ```env
+   DB_HOST=127.0.0.1
+   DB_USER=root
+   DB_PASSWORD=admin
+   DB_NAME=aqi_db
+   PORT=4000
+   ```
+3. Install dependencies and start the server:
+   ```bash
+   npm install
+   npm start
+   ```
 
----
+### Step 3: Run the Machine Learning Pipeline (Python)
+*Note: The results are already stored in `frontend/public/` so this is technically optional unless you want to update models or process new database entries.*
+1. Navigate to the ML directory:
+   ```bash
+   cd ml
+   ```
+2. Install the necessary Python packages:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Execute the Master Pipeline Script:
+   ```bash
+   python generate_all.py
+   ```
 
-## 📊 6. Sample Analytical Queries
+### Step 4: Run the Frontend Application
+1. Open a new terminal and navigate to the frontend directory:
+   ```bash
+   cd frontend
+   ```
+2. Install npm dependencies:
+   ```bash
+   npm install
+   ```
+3. Boot the development server:
+   ```bash
+   npm run dev
+   ```
+4. Access the web dashboard at `http://localhost:5173/`. 
 
-* Longest duration of "Severe" AQI in a city
-* State-wise improvement in AQI over time
-* Dates of extreme AQI spikes (Anomaly Detection)
-* Monthly average PM2.5 levels
-* Yearly AQI growth/decline rate
-* Dominant pollutant (PM2.5 vs PM10)
-* Worst month for air quality
-* AQI patterns (weekdays vs weekends)
-* Impact of rainfall on AQI
-* Cities with highly volatile AQI
-
----
-
-## 🗄️ 7. Database Setup (MariaDB)
-
-### Prerequisites
-
-* MariaDB Server installed
-* CSV files available in `/data` folder
-
----
-
-### Step 1: Open Command Prompt and navigate to project
-
-cd project-root
-
----
-
-### Step 2: Start MariaDB Client
-
-Run the following command:
-
-"C:\Program Files\MariaDB 12.2\bin\mysql.exe" -u root -p
-
-Enter your password when prompted.
-
----
-
-### Step 3: Enable local infile (Required for CSV loading)
-
-Inside MariaDB terminal:
-
-SET GLOBAL local_infile = 1;
-
----
-
-### Step 4: Run Schema File
-
-SOURCE database/schema.sql;
-
----
-
-### Step 5: Run Seed File
-
-SOURCE database/seed.sql;
-
----
-
-### Notes
-
-* Ensure CSV paths in `seed.sql` are correct (relative to project root)
-* `local_infile` must be enabled for `LOAD DATA LOCAL INFILE` to work
-* Use forward slashes `/` in file paths if facing issues on Windows
-
----
+*(Toggle between the traditional Dashboard and the Research Query Engine from the top switch bar).*

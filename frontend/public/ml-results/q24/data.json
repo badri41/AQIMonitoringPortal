@@ -1,0 +1,97 @@
+{
+  "query": "Q24",
+  "title": "NO2/AQI Ratio \u2014 Traffic Pollution Indicator",
+  "ml_type": "Trend Analysis",
+  "results": [
+    {
+      "city": "Pune",
+      "avg_no2": 44.03,
+      "avg_aqi": 109.05,
+      "traffic_ratio": 0.4038
+    },
+    {
+      "city": "Jaipur",
+      "avg_no2": 19.89,
+      "avg_aqi": 124.75,
+      "traffic_ratio": 0.1595
+    },
+    {
+      "city": "Indore",
+      "avg_no2": 16.1,
+      "avg_aqi": 111.88,
+      "traffic_ratio": 0.1439
+    },
+    {
+      "city": "Bhopal",
+      "avg_no2": 15.2,
+      "avg_aqi": 107.81,
+      "traffic_ratio": 0.141
+    },
+    {
+      "city": "Noida",
+      "avg_no2": 23.22,
+      "avg_aqi": 165.35,
+      "traffic_ratio": 0.1404
+    },
+    {
+      "city": "Ahmedabad",
+      "avg_no2": 16.72,
+      "avg_aqi": 122.62,
+      "traffic_ratio": 0.1364
+    },
+    {
+      "city": "Bangalore",
+      "avg_no2": 11.36,
+      "avg_aqi": 86.72,
+      "traffic_ratio": 0.131
+    },
+    {
+      "city": "Mumbai",
+      "avg_no2": 14.34,
+      "avg_aqi": 111.04,
+      "traffic_ratio": 0.1292
+    },
+    {
+      "city": "Delhi",
+      "avg_no2": 22.22,
+      "avg_aqi": 173.71,
+      "traffic_ratio": 0.1279
+    },
+    {
+      "city": "Chandigarh",
+      "avg_no2": 14.64,
+      "avg_aqi": 126.02,
+      "traffic_ratio": 0.1162
+    },
+    {
+      "city": "Kolkata",
+      "avg_no2": 14.05,
+      "avg_aqi": 123.85,
+      "traffic_ratio": 0.1135
+    },
+    {
+      "city": "Hyderabad",
+      "avg_no2": 11.49,
+      "avg_aqi": 102.89,
+      "traffic_ratio": 0.1117
+    },
+    {
+      "city": "Lucknow",
+      "avg_no2": 14.75,
+      "avg_aqi": 143.24,
+      "traffic_ratio": 0.103
+    },
+    {
+      "city": "Chennai",
+      "avg_no2": 7.79,
+      "avg_aqi": 89.68,
+      "traffic_ratio": 0.0868
+    },
+    {
+      "city": "Guwahati",
+      "avg_no2": 3.84,
+      "avg_aqi": 117.76,
+      "traffic_ratio": 0.0326
+    }
+  ]
+}

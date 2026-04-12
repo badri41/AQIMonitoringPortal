@@ -1,0 +1,97 @@
+{
+  "query": "Q29",
+  "title": "Sharpest Winter-to-Summer AQI Drop",
+  "ml_type": "Seasonal Analysis",
+  "results": [
+    {
+      "city": "Kolkata",
+      "winter_avg": 188.1,
+      "summer_avg": 86.9,
+      "seasonal_drop": 101.27
+    },
+    {
+      "city": "Delhi",
+      "winter_avg": 237.3,
+      "summer_avg": 145.3,
+      "seasonal_drop": 91.96
+    },
+    {
+      "city": "Noida",
+      "winter_avg": 225.1,
+      "summer_avg": 141.7,
+      "seasonal_drop": 83.36
+    },
+    {
+      "city": "Guwahati",
+      "winter_avg": 172.1,
+      "summer_avg": 92.8,
+      "seasonal_drop": 79.34
+    },
+    {
+      "city": "Mumbai",
+      "winter_avg": 156.2,
+      "summer_avg": 86.5,
+      "seasonal_drop": 69.72
+    },
+    {
+      "city": "Lucknow",
+      "winter_avg": 189.4,
+      "summer_avg": 127.7,
+      "seasonal_drop": 61.67
+    },
+    {
+      "city": "Pune",
+      "winter_avg": 144.6,
+      "summer_avg": 84.7,
+      "seasonal_drop": 59.94
+    },
+    {
+      "city": "Chandigarh",
+      "winter_avg": 165.6,
+      "summer_avg": 111.3,
+      "seasonal_drop": 54.25
+    },
+    {
+      "city": "Bhopal",
+      "winter_avg": 138.6,
+      "summer_avg": 92.8,
+      "seasonal_drop": 45.83
+    },
+    {
+      "city": "Hyderabad",
+      "winter_avg": 133.9,
+      "summer_avg": 90.9,
+      "seasonal_drop": 42.97
+    },
+    {
+      "city": "Chennai",
+      "winter_avg": 116.1,
+      "summer_avg": 73.9,
+      "seasonal_drop": 42.12
+    },
+    {
+      "city": "Indore",
+      "winter_avg": 138.8,
+      "summer_avg": 97.5,
+      "seasonal_drop": 41.26
+    },
+    {
+      "city": "Ahmedabad",
+      "winter_avg": 145.7,
+      "summer_avg": 114.6,
+      "seasonal_drop": 31.07
+    },
+    {
+      "city": "Bangalore",
+      "winter_avg": 107.4,
+      "summer_avg": 77.7,
+      "seasonal_drop": 29.62
+    },
+    {
+      "city": "Jaipur",
+      "winter_avg": 146.3,
+      "summer_avg": 124.5,
+      "seasonal_drop": 21.76
+    }
+  ]
+}

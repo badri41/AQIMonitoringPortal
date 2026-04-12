@@ -1,0 +1,35 @@
+{
+  "city": "Guwahati",
+  "model": "Rule-Based (NAQI India)",
+  "health_score": 1.64,
+  "max_possible_score": 10,
+  "risk_tier": "Moderate Risk",
+  "advisory": "Sensitive groups (children, elderly, asthma) should limit prolonged outdoor activity.",
+  "total_days_analyzed": 1892,
+  "category_breakdown": {
+    "Good": {
+      "days": 131,
+      "percentage": 6.9
+    },
+    "Satisfactory": {
+      "days": 723,
+      "percentage": 38.2
+    },
+    "Moderate": {
+      "days": 902,
+      "percentage": 47.7
+    },
+    "Poor": {
+      "days": 128,
+      "percentage": 6.8
+    },
+    "Very Poor": {
+      "days": 7,
+      "percentage": 0.4
+    },
+    "Severe": {
+      "days": 1,
+      "percentage": 0.1
+    }
+  }
+}

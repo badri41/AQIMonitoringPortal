@@ -1,0 +1,27 @@
+{
+  "query": "Q28",
+  "title": "Early Warning: PM2.5 Before Severe AQI",
+  "ml_type": "Trend Analysis",
+  "results": [
+    {
+      "city": "Delhi",
+      "avg_warning_days": 1.8,
+      "events": 32
+    },
+    {
+      "city": "Noida",
+      "avg_warning_days": 1.7,
+      "events": 46
+    },
+    {
+      "city": "Guwahati",
+      "avg_warning_days": 1.0,
+      "events": 1
+    },
+    {
+      "city": "Lucknow",
+      "avg_warning_days": 1.0,
+      "events": 11
+    }
+  ]
+}

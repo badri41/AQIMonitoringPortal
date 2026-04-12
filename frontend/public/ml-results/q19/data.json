@@ -1,0 +1,47 @@
+{
+  "query": "Q19",
+  "title": "Fastest AQI Recovery After Extreme Days",
+  "ml_type": "Health Risk",
+  "results": [
+    {
+      "city": "Jaipur",
+      "avg_recovery_days": 23.0,
+      "events": 1
+    },
+    {
+      "city": "Lucknow",
+      "avg_recovery_days": 68.0,
+      "events": 2
+    },
+    {
+      "city": "Guwahati",
+      "avg_recovery_days": 84.0,
+      "events": 1
+    },
+    {
+      "city": "Kolkata",
+      "avg_recovery_days": 86.5,
+      "events": 2
+    },
+    {
+      "city": "Chandigarh",
+      "avg_recovery_days": 89.0,
+      "events": 1
+    },
+    {
+      "city": "Indore",
+      "avg_recovery_days": 96.0,
+      "events": 1
+    },
+    {
+      "city": "Noida",
+      "avg_recovery_days": 101.8,
+      "events": 6
+    },
+    {
+      "city": "Delhi",
+      "avg_recovery_days": 155.6,
+      "events": 5
+    }
+  ]
+}

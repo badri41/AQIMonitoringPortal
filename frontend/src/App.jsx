@@ -6,6 +6,7 @@ import AqiScale from './components/AqiScale';
 import TrendChart from './components/TrendChart';
 import HistoricalChart from './components/HistoricalChart';
 import StatsOverview from './components/StatsOverview';
+import MLInsightsPanel from './components/MLInsightsPanel';
 import { fetchCities, fetchDailyAqi } from './services/api';
 import { aggregateWeekly, aggregateMonthly } from './utils/dataTransforms';
 import './App.css';
@@ -20,6 +21,7 @@ export default function App() {
   const [dailyData, setDailyData] = useState([]);
   const [isDailyLoading, setIsDailyLoading] = useState(false);
   const [dataError, setDataError] = useState('');
+  const [activeView, setActiveView] = useState('dashboard'); // 'dashboard' | 'ml-insights'
 
   useEffect(() => {
     let ignore = false;
@@ -124,58 +126,75 @@ export default function App() {
   return (
     <div className="app">
       <Header location={location} />
+
+      <div className="view-switcher">
+        <button
+          className={`view-tab ${activeView === 'dashboard' ? 'active' : ''}`}
+          onClick={() => setActiveView('dashboard')}
+        >
+          Dashboard
+        </button>
+        <button
+          className={`view-tab ${activeView === 'ml-insights' ? 'active' : ''}`}
+          onClick={() => setActiveView('ml-insights')}
+        >
+          Queries
+        </button>
+      </div>
+
       <main className="app-content">
-        <FilterBar
-          locations={locations}
-          selectedLocation={selectedLocation}
-          onLocationChange={setSelectedLocation}
-          selectedMonth={selectedMonth}
-          onMonthChange={setSelectedMonth}
-          selectedYear={selectedYear}
-          onYearChange={handleYearChange}
-          granularity={granularity}
-          onGranularityChange={setGranularity}
-        />
-
-        {dataError && <p className="app-data-error">{dataError}</p>}
-
-        {!selectedLocation ? (
-          /* Landing: Overview of all regions */
-          <StatsOverview onSelectCity={handleSelectCity} />
-        ) : (
-          /* City detail view */
-          <div className="city-detail fade-in">
-            <div className="city-detail-header">
-              <h2 className="city-title">
-                <span className="city-name-highlight">{location?.name}, {location?.state}</span>
-                {' '}Historical Air Quality Analysis
-              </h2>
-              <p className="city-subtitle">
-                Dive into detailed Air Quality Insights with historical data, monthly patterns, and yearly trends at your fingertips!
-              </p>
-            </div>
-
-            <AqiScale currentAqi={currentAqi} />
-
-            <MetricTabs activeMetric={activeMetric} onMetricChange={setActiveMetric} />
-
-            {isDailyLoading && <p className="city-loading">Loading city data...</p>}
-
-            {/* Trend chart based on granularity */}
-            <TrendChart
-              data={aggregatedData}
-              metric={activeMetric}
+        {activeView === 'dashboard' ? (
+          /* ── Dashboard View ─── */
+          <>
+            <FilterBar
+              locations={locations}
+              selectedLocation={selectedLocation}
+              onLocationChange={setSelectedLocation}
+              selectedMonth={selectedMonth}
+              onMonthChange={setSelectedMonth}
+              selectedYear={selectedYear}
+              onYearChange={handleYearChange}
               granularity={granularity}
+              onGranularityChange={setGranularity}
             />
 
-            {/* Historical multi-year comparison */}
-            <HistoricalChart
-              locationId={selectedLocation}
-              month={selectedMonth}
-              metric={activeMetric}
-              locationName={`${location?.name}, ${location?.state}`}
-            />
-          </div>
+            {dataError && <p className="app-data-error">{dataError}</p>}
+
+            {!selectedLocation ? (
+              <StatsOverview onSelectCity={handleSelectCity} />
+            ) : (
+              <div className="city-detail fade-in">
+                <div className="city-detail-header">
+                  <h2 className="city-title">
+                    <span className="city-name-highlight">{location?.name}, {location?.state}</span>
+                    {' '}Historical Air Quality Analysis
+                  </h2>
+                  <p className="city-subtitle">
+                    Dive into detailed Air Quality Insights with historical data, monthly patterns, and yearly trends at your fingertips!
+                  </p>
+                </div>
+
+                <AqiScale currentAqi={currentAqi} />
+                <MetricTabs activeMetric={activeMetric} onMetricChange={setActiveMetric} />
+                {isDailyLoading && <p className="city-loading">Loading city data...</p>}
+
+                <TrendChart
+                  data={aggregatedData}
+                  metric={activeMetric}
+                  granularity={granularity}
+                />
+                <HistoricalChart
+                  locationId={selectedLocation}
+                  month={selectedMonth}
+                  metric={activeMetric}
+                  locationName={`${location?.name}, ${location?.state}`}
+                />
+              </div>
+            )}
+          </>
+        ) : (
+          /* ── ML Insights View ─── */
+          <MLInsightsPanel />
         )}
       </main>
 

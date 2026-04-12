@@ -1,7 +1,12 @@
 require("dotenv").config();
 
+BigInt.prototype.toJSON = function () {
+  return this.toString();
+};
+
 const cors = require("cors");
 const express = require("express");
+
 
 const apiRouter = require("./routes");
 const { closePool } = require("./db/connections");

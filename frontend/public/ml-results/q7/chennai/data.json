@@ -1,0 +1,65 @@
+{
+  "city": "Chennai",
+  "metric": "PM2.5",
+  "model_used": "LSTM",
+  "forecast_days": 365,
+  "forecast_summary": {
+    "avg": 28.7,
+    "min": 28.4,
+    "max": 36.3
+  },
+  "forecast_monthly": [
+    {
+      "month": "Mar 2026",
+      "predicted_avg": 34.6
+    },
+    {
+      "month": "Apr 2026",
+      "predicted_avg": 29.4
+    },
+    {
+      "month": "May 2026",
+      "predicted_avg": 29.1
+    },
+    {
+      "month": "Jun 2026",
+      "predicted_avg": 28.8
+    },
+    {
+      "month": "Jul 2026",
+      "predicted_avg": 28.7
+    },
+    {
+      "month": "Aug 2026",
+      "predicted_avg": 28.6
+    },
+    {
+      "month": "Sep 2026",
+      "predicted_avg": 28.5
+    },
+    {
+      "month": "Oct 2026",
+      "predicted_avg": 28.5
+    },
+    {
+      "month": "Nov 2026",
+      "predicted_avg": 28.4
+    },
+    {
+      "month": "Dec 2026",
+      "predicted_avg": 28.4
+    },
+    {
+      "month": "Jan 2027",
+      "predicted_avg": 28.4
+    },
+    {
+      "month": "Feb 2027",
+      "predicted_avg": 28.4
+    },
+    {
+      "month": "Mar 2027",
+      "predicted_avg": 28.4
+    }
+  ]
+}

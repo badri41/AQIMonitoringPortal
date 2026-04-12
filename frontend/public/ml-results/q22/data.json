@@ -1,0 +1,82 @@
+{
+  "query": "Q22",
+  "title": "90th & 95th Percentile Pollution by State",
+  "ml_type": "Health Risk",
+  "results": [
+    {
+      "city": "Delhi",
+      "p90": 285.9,
+      "p95": 327.0
+    },
+    {
+      "city": "Noida",
+      "p90": 266.0,
+      "p95": 318.5
+    },
+    {
+      "city": "Lucknow",
+      "p90": 210.0,
+      "p95": 254.0
+    },
+    {
+      "city": "Kolkata",
+      "p90": 199.0,
+      "p95": 226.4
+    },
+    {
+      "city": "Guwahati",
+      "p90": 191.0,
+      "p95": 211.0
+    },
+    {
+      "city": "Chandigarh",
+      "p90": 181.0,
+      "p95": 198.0
+    },
+    {
+      "city": "Mumbai",
+      "p90": 171.0,
+      "p95": 182.0
+    },
+    {
+      "city": "Jaipur",
+      "p90": 166.0,
+      "p95": 176.0
+    },
+    {
+      "city": "Pune",
+      "p90": 162.3,
+      "p95": 176.0
+    },
+    {
+      "city": "Ahmedabad",
+      "p90": 162.0,
+      "p95": 174.0
+    },
+    {
+      "city": "Indore",
+      "p90": 159.0,
+      "p95": 170.0
+    },
+    {
+      "city": "Bhopal",
+      "p90": 158.0,
+      "p95": 168.0
+    },
+    {
+      "city": "Hyderabad",
+      "p90": 151.9,
+      "p95": 162.0
+    },
+    {
+      "city": "Chennai",
+      "p90": 132.0,
+      "p95": 155.4
+    },
+    {
+      "city": "Bangalore",
+      "p90": 126.0,
+      "p95": 140.0
+    }
+  ]
+}

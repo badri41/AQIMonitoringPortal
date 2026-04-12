@@ -1,0 +1,217 @@
+{
+  "query": "Q21",
+  "title": "Earliest Winter Pollution Onset by Region",
+  "ml_type": "Trend Forecast",
+  "onset_data": [
+    {
+      "city": "Ahmedabad",
+      "year": 2021,
+      "onset_date": "2021-12-27",
+      "onset_month": 12,
+      "onset_day": 27
+    },
+    {
+      "city": "Ahmedabad",
+      "year": 2025,
+      "onset_date": "2025-11-21",
+      "onset_month": 11,
+      "onset_day": 21
+    },
+    {
+      "city": "Bhopal",
+      "year": 2021,
+      "onset_date": "2021-11-11",
+      "onset_month": 11,
+      "onset_day": 11
+    },
+    {
+      "city": "Bhopal",
+      "year": 2025,
+      "onset_date": "2025-11-17",
+      "onset_month": 11,
+      "onset_day": 17
+    },
+    {
+      "city": "Chandigarh",
+      "year": 2022,
+      "onset_date": "2022-11-09",
+      "onset_month": 11,
+      "onset_day": 9
+    },
+    {
+      "city": "Chandigarh",
+      "year": 2023,
+      "onset_date": "2023-12-20",
+      "onset_month": 12,
+      "onset_day": 20
+    },
+    {
+      "city": "Chandigarh",
+      "year": 2024,
+      "onset_date": "2024-11-09",
+      "onset_month": 11,
+      "onset_day": 9
+    },
+    {
+      "city": "Chandigarh",
+      "year": 2025,
+      "onset_date": "2025-10-22",
+      "onset_month": 10,
+      "onset_day": 22
+    },
+    {
+      "city": "Chennai",
+      "year": 2025,
+      "onset_date": "2025-12-11",
+      "onset_month": 12,
+      "onset_day": 11
+    },
+    {
+      "city": "Delhi",
+      "year": 2021,
+      "onset_date": "2021-10-31",
+      "onset_month": 10,
+      "onset_day": 31
+    },
+    {
+      "city": "Delhi",
+      "year": 2022,
+      "onset_date": "2022-10-22",
+      "onset_month": 10,
+      "onset_day": 22
+    },
+    {
+      "city": "Delhi",
+      "year": 2023,
+      "onset_date": "2023-10-25",
+      "onset_month": 10,
+      "onset_day": 25
+    },
+    {
+      "city": "Delhi",
+      "year": 2024,
+      "onset_date": "2024-10-18",
+      "onset_month": 10,
+      "onset_day": 18
+    },
+    {
+      "city": "Delhi",
+      "year": 2025,
+      "onset_date": "2025-10-18",
+      "onset_month": 10,
+      "onset_day": 18
+    },
+    {
+      "city": "Guwahati",
+      "year": 2021,
+      "onset_date": "2021-12-23",
+      "onset_month": 12,
+      "onset_day": 23
+    },
+    {
+      "city": "Guwahati",
+      "year": 2022,
+      "onset_date": "2022-12-17",
+      "onset_month": 12,
+      "onset_day": 17
+    },
+    {
+      "city": "Hyderabad",
+      "year": 2025,
+      "onset_date": "2025-12-18",
+      "onset_month": 12,
+      "onset_day": 18
+    },
+    {
+      "city": "Jaipur",
+      "year": 2021,
+      "onset_date": "2021-11-07",
+      "onset_month": 11,
+      "onset_day": 7
+    },
+    {
+      "city": "Jaipur",
+      "year": 2025,
+      "onset_date": "2025-11-20",
+      "onset_month": 11,
+      "onset_day": 20
+    },
+    {
+      "city": "Kolkata",
+      "year": 2021,
+      "onset_date": "2021-12-15",
+      "onset_month": 12,
+      "onset_day": 15
+    },
+    {
+      "city": "Kolkata",
+      "year": 2022,
+      "onset_date": "2022-11-17",
+      "onset_month": 11,
+      "onset_day": 17
+    },
+    {
+      "city": "Kolkata",
+      "year": 2023,
+      "onset_date": "2023-11-11",
+      "onset_month": 11,
+      "onset_day": 11
+    },
+    {
+      "city": "Kolkata",
+      "year": 2025,
+      "onset_date": "2025-11-09",
+      "onset_month": 11,
+      "onset_day": 9
+    },
+    {
+      "city": "Lucknow",
+      "year": 2021,
+      "onset_date": "2021-11-03",
+      "onset_month": 11,
+      "onset_day": 3
+    },
+    {
+      "city": "Lucknow",
+      "year": 2022,
+      "onset_date": "2022-10-25",
+      "onset_month": 10,
+      "onset_day": 25
+    },
+    {
+      "city": "Lucknow",
+      "year": 2023,
+      "onset_date": "2023-11-07",
+      "onset_month": 11,
+      "onset_day": 7
+    },
+    {
+      "city": "Lucknow",
+      "year": 2024,
+      "onset_date": "2024-11-14",
+      "onset_month": 11,
+      "onset_day": 14
+    },
+    {
+      "city": "Lucknow",
+      "year": 2025,
+      "onset_date": "2025-10-21",
+      "onset_month": 10,
+      "onset_day": 21
+    },
+    {
+      "city": "Mumbai",
+      "year": 2021,
+      "onset_date": "2021-11-14",
+      "onset_month": 11,
+      "onset_day": 14
+    },
+    {
+      "city": "Mumbai",
+      "year": 2022,
+      "onset_date": "2022-12-06",
+      "onset_month": 12,
+      "onset_day": 6
+    }
+  ]
+}

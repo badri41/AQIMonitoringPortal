@@ -1,0 +1,29 @@
+{
+  "generated_at": "2026-04-12T23:17:03.624330",
+  "data_rows": 28005,
+  "cities": [
+    "Ahmedabad",
+    "Bangalore",
+    "Bhopal",
+    "Chandigarh",
+    "Chennai",
+    "Delhi",
+    "Guwahati",
+    "Hyderabad",
+    "Indore",
+    "Jaipur",
+    "Kolkata",
+    "Lucknow",
+    "Mumbai",
+    "Noida",
+    "Pune"
+  ],
+  "date_range": "2021-01-01 to 2026-03-28",
+  "models_used": [
+    "LSTM / Holt-Winters",
+    "Isolation Forest",
+    "K-Means + PCA",
+    "Rule-Based (NAQI)"
+  ],
+  "total_queries": 30
+}

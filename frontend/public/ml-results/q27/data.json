@@ -1,0 +1,27 @@
+{
+  "query": "Q27",
+  "title": "Recovery Time After Extreme Pollution",
+  "ml_type": "Health Risk",
+  "results": [
+    {
+      "city": "Guwahati",
+      "avg_recovery": 43.0,
+      "events": 1
+    },
+    {
+      "city": "Noida",
+      "avg_recovery": 84.7,
+      "events": 3
+    },
+    {
+      "city": "Lucknow",
+      "avg_recovery": 125.0,
+      "events": 1
+    },
+    {
+      "city": "Delhi",
+      "avg_recovery": 132.0,
+      "events": 2
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "city": "Delhi",
+  "model": "Rule-Based (NAQI India)",
+  "health_score": 2.68,
+  "max_possible_score": 10,
+  "risk_tier": "Moderate Risk",
+  "advisory": "Sensitive groups (children, elderly, asthma) should limit prolonged outdoor activity.",
+  "total_days_analyzed": 1892,
+  "category_breakdown": {
+    "Good": {
+      "days": 6,
+      "percentage": 0.3
+    },
+    "Satisfactory": {
+      "days": 321,
+      "percentage": 17.0
+    },
+    "Moderate": {
+      "days": 1016,
+      "percentage": 53.7
+    },
+    "Poor": {
+      "days": 407,
+      "percentage": 21.5
+    },
+    "Very Poor": {
+      "days": 110,
+      "percentage": 5.8
+    },
+    "Severe": {
+      "days": 32,
+      "percentage": 1.7
+    }
+  }
+}

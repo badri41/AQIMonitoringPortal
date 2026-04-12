@@ -1,5 +1,54 @@
 /* App-specific layout styles */
 
+/* View Switcher Controls */
+.view-switcher {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 24px auto 8px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 6px;
+  border-radius: 30px;
+  width: fit-content;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+}
+
+.view-tab {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  padding: 10px 24px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+}
+
+.view-tab:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.view-tab.active {
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+[data-theme="light"] .view-switcher {
+  background: rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .view-tab.active {
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+}
+
 .city-detail {
   animation: fadeIn 0.5s ease;
 }

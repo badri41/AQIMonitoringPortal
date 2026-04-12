@@ -1,0 +1,27 @@
+{
+  "city": "Pune",
+  "model": "Rule-Based (NAQI India)",
+  "health_score": 1.52,
+  "max_possible_score": 10,
+  "risk_tier": "Moderate Risk",
+  "advisory": "Sensitive groups (children, elderly, asthma) should limit prolonged outdoor activity.",
+  "total_days_analyzed": 1888,
+  "category_breakdown": {
+    "Good": {
+      "days": 120,
+      "percentage": 6.4
+    },
+    "Satisfactory": {
+      "days": 735,
+      "percentage": 38.9
+    },
+    "Moderate": {
+      "days": 1002,
+      "percentage": 53.1
+    },
+    "Poor": {
+      "days": 31,
+      "percentage": 1.6
+    }
+  }
+}

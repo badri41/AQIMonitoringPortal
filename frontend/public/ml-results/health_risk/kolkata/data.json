@@ -1,0 +1,31 @@
+{
+  "city": "Kolkata",
+  "model": "Rule-Based (NAQI India)",
+  "health_score": 1.71,
+  "max_possible_score": 10,
+  "risk_tier": "Moderate Risk",
+  "advisory": "Sensitive groups (children, elderly, asthma) should limit prolonged outdoor activity.",
+  "total_days_analyzed": 1893,
+  "category_breakdown": {
+    "Good": {
+      "days": 120,
+      "percentage": 6.3
+    },
+    "Satisfactory": {
+      "days": 705,
+      "percentage": 37.2
+    },
+    "Moderate": {
+      "days": 891,
+      "percentage": 47.1
+    },
+    "Poor": {
+      "days": 162,
+      "percentage": 8.6
+    },
+    "Very Poor": {
+      "days": 15,
+      "percentage": 0.8
+    }
+  }
+}

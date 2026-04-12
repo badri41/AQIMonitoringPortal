@@ -1,0 +1,35 @@
+{
+  "city": "Noida",
+  "model": "Rule-Based (NAQI India)",
+  "health_score": 2.54,
+  "max_possible_score": 10,
+  "risk_tier": "Moderate Risk",
+  "advisory": "Sensitive groups (children, elderly, asthma) should limit prolonged outdoor activity.",
+  "total_days_analyzed": 1891,
+  "category_breakdown": {
+    "Good": {
+      "days": 23,
+      "percentage": 1.2
+    },
+    "Satisfactory": {
+      "days": 360,
+      "percentage": 19.0
+    },
+    "Moderate": {
+      "days": 1037,
+      "percentage": 54.8
+    },
+    "Poor": {
+      "days": 355,
+      "percentage": 18.8
+    },
+    "Very Poor": {
+      "days": 70,
+      "percentage": 3.7
+    },
+    "Severe": {
+      "days": 46,
+      "percentage": 2.4
+    }
+  }
+}

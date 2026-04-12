@@ -1,0 +1,97 @@
+{
+  "query": "Q15",
+  "title": "AQI Volatility Frequency (Drastic Changes)",
+  "ml_type": "Anomaly Detection",
+  "results": [
+    {
+      "city": "Noida",
+      "drastic_changes": 261,
+      "total_days": 1890,
+      "volatility_rate": 13.8
+    },
+    {
+      "city": "Delhi",
+      "drastic_changes": 236,
+      "total_days": 1891,
+      "volatility_rate": 12.5
+    },
+    {
+      "city": "Lucknow",
+      "drastic_changes": 87,
+      "total_days": 1890,
+      "volatility_rate": 4.6
+    },
+    {
+      "city": "Guwahati",
+      "drastic_changes": 64,
+      "total_days": 1891,
+      "volatility_rate": 3.4
+    },
+    {
+      "city": "Jaipur",
+      "drastic_changes": 52,
+      "total_days": 1891,
+      "volatility_rate": 2.7
+    },
+    {
+      "city": "Kolkata",
+      "drastic_changes": 49,
+      "total_days": 1892,
+      "volatility_rate": 2.6
+    },
+    {
+      "city": "Chandigarh",
+      "drastic_changes": 38,
+      "total_days": 1891,
+      "volatility_rate": 2.0
+    },
+    {
+      "city": "Indore",
+      "drastic_changes": 24,
+      "total_days": 1520,
+      "volatility_rate": 1.6
+    },
+    {
+      "city": "Pune",
+      "drastic_changes": 31,
+      "total_days": 1887,
+      "volatility_rate": 1.6
+    },
+    {
+      "city": "Ahmedabad",
+      "drastic_changes": 27,
+      "total_days": 1890,
+      "volatility_rate": 1.4
+    },
+    {
+      "city": "Chennai",
+      "drastic_changes": 26,
+      "total_days": 1891,
+      "volatility_rate": 1.4
+    },
+    {
+      "city": "Mumbai",
+      "drastic_changes": 25,
+      "total_days": 1890,
+      "volatility_rate": 1.3
+    },
+    {
+      "city": "Bhopal",
+      "drastic_changes": 16,
+      "total_days": 1890,
+      "volatility_rate": 0.8
+    },
+    {
+      "city": "Bangalore",
+      "drastic_changes": 8,
+      "total_days": 1895,
+      "volatility_rate": 0.4
+    },
+    {
+      "city": "Hyderabad",
+      "drastic_changes": 6,
+      "total_days": 1891,
+      "volatility_rate": 0.3
+    }
+  ]
+}

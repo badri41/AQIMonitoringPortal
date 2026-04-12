@@ -1,0 +1,91 @@
+{
+  "query": "Q4",
+  "title": "Severe & Very Poor Day Counts (Hotspots)",
+  "ml_type": "Health Risk Assessment",
+  "hotspots": [
+    {
+      "city": "Delhi",
+      "year": 2021,
+      "very_poor": 2,
+      "severe": 0,
+      "total_bad": 2
+    },
+    {
+      "city": "Delhi",
+      "year": 2024,
+      "very_poor": 4,
+      "severe": 2,
+      "total_bad": 6
+    },
+    {
+      "city": "Delhi",
+      "year": 2025,
+      "very_poor": 11,
+      "severe": 9,
+      "total_bad": 20
+    },
+    {
+      "city": "Delhi",
+      "year": 2026,
+      "very_poor": 2,
+      "severe": 2,
+      "total_bad": 4
+    },
+    {
+      "city": "Guwahati",
+      "year": 2021,
+      "very_poor": 1,
+      "severe": 0,
+      "total_bad": 1
+    },
+    {
+      "city": "Lucknow",
+      "year": 2021,
+      "very_poor": 2,
+      "severe": 0,
+      "total_bad": 2
+    },
+    {
+      "city": "Lucknow",
+      "year": 2025,
+      "very_poor": 4,
+      "severe": 1,
+      "total_bad": 5
+    },
+    {
+      "city": "Lucknow",
+      "year": 2026,
+      "very_poor": 3,
+      "severe": 1,
+      "total_bad": 4
+    },
+    {
+      "city": "Noida",
+      "year": 2021,
+      "very_poor": 2,
+      "severe": 0,
+      "total_bad": 2
+    },
+    {
+      "city": "Noida",
+      "year": 2024,
+      "very_poor": 2,
+      "severe": 0,
+      "total_bad": 2
+    },
+    {
+      "city": "Noida",
+      "year": 2025,
+      "very_poor": 20,
+      "severe": 14,
+      "total_bad": 34
+    },
+    {
+      "city": "Noida",
+      "year": 2026,
+      "very_poor": 7,
+      "severe": 1,
+      "total_bad": 8
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "query": "Q20",
+  "title": "Gas vs Particulate Pollution by Region",
+  "ml_type": "Clustering",
+  "results": [
+    {
+      "city": "Ahmedabad",
+      "avg_gas": 29.17,
+      "avg_particulate": 153.45,
+      "ratio": 0.1901,
+      "profile": "Particulate-Dominant"
+    },
+    {
+      "city": "Bangalore",
+      "avg_gas": 25.03,
+      "avg_particulate": 91.04,
+      "ratio": 0.2749,
+      "profile": "Particulate-Dominant"
+    },
+    {
+      "city": "Bhopal",
+      "avg_gas": 37.94,
+      "avg_particulate": 142.8,
+      "ratio": 0.2657,
+      "profile": "Particulate-Dominant"
+    },
+    {
+      "city": "Chandigarh",
+      "avg_gas": 32.3,
+      "avg_particulate": 157.76,
+      "ratio": 0.2047,
+      "profile": "Particulate-Dominant"
+    },
+    {
+      "city": "Chennai",
+      "avg_gas": 18.92,
+      "avg_particulate": 91.76,
+      "ratio": 0.2062,
+      "profile": "Particulate-Dominant"
+    },
+    {
+      "city": "Delhi",
+      "avg_gas": 38.84,
+      "avg_particulate": 289.08,
+      "ratio": 0.1344,
+      "profile": "Particulate-Dominant"
+    },
+    {
+      "city": "Guwahati",
+      "avg_gas": 15.19,
+      "avg_particulate": 152.34,
+      "ratio": 0.0997,
+      "profile": "Particulate-Dominant"
+    },
+    {
+      "city": "Hyderabad",
+      "avg_gas": 22.06,
+      "avg_particulate": 109.29,
+      "ratio": 0.2019,
+      "profile": "Particulate-Dominant"
+    },
+    {
+      "city": "Indore",
+      "avg_gas": 42.34,
+      "avg_particulate": 142.44,
+      "ratio": 0.2973,
+      "profile": "Particulate-Dominant"
+    },
+    {
+      "city": "Jaipur",
+      "avg_gas": 40.43,
+      "avg_particulate": 159.82,
+      "ratio": 0.253,
+      "profile": "Particulate-Dominant"
+    },
+    {
+      "city": "Kolkata",
+      "avg_gas": 30.3,
+      "avg_particulate": 161.48,
+      "ratio": 0.1877,
+      "profile": "Particulate-Dominant"
+    },
+    {
+      "city": "Lucknow",
+      "avg_gas": 30.99,
+      "avg_particulate": 208.49,
+      "ratio": 0.1486,
+      "profile": "Particulate-Dominant"
+    },
+    {
+      "city": "Mumbai",
+      "avg_gas": 28.87,
+      "avg_particulate": 152.32,
+      "ratio": 0.1896,
+      "profile": "Particulate-Dominant"
+    },
+    {
+      "city": "Noida",
+      "avg_gas": 41.54,
+      "avg_particulate": 275.95,
+      "ratio": 0.1505,
+      "profile": "Particulate-Dominant"
+    },
+    {
+      "city": "Pune",
+      "avg_gas": 71.34,
+      "avg_particulate": 147.13,
+      "ratio": 0.4849,
+      "profile": "Particulate-Dominant"
+    }
+  ]
+}

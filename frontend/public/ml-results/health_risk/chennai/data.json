@@ -1,0 +1,27 @@
+{
+  "city": "Chennai",
+  "model": "Rule-Based (NAQI India)",
+  "health_score": 1.25,
+  "max_possible_score": 10,
+  "risk_tier": "Moderate Risk",
+  "advisory": "Sensitive groups (children, elderly, asthma) should limit prolonged outdoor activity.",
+  "total_days_analyzed": 1892,
+  "category_breakdown": {
+    "Good": {
+      "days": 89,
+      "percentage": 4.7
+    },
+    "Satisfactory": {
+      "days": 1242,
+      "percentage": 65.6
+    },
+    "Moderate": {
+      "days": 557,
+      "percentage": 29.4
+    },
+    "Poor": {
+      "days": 4,
+      "percentage": 0.2
+    }
+  }
+}

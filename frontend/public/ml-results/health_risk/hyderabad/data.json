@@ -1,0 +1,27 @@
+{
+  "city": "Hyderabad",
+  "model": "Rule-Based (NAQI India)",
+  "health_score": 1.45,
+  "max_possible_score": 10,
+  "risk_tier": "Moderate Risk",
+  "advisory": "Sensitive groups (children, elderly, asthma) should limit prolonged outdoor activity.",
+  "total_days_analyzed": 1892,
+  "category_breakdown": {
+    "Good": {
+      "days": 87,
+      "percentage": 4.6
+    },
+    "Satisfactory": {
+      "days": 874,
+      "percentage": 46.2
+    },
+    "Moderate": {
+      "days": 928,
+      "percentage": 49.0
+    },
+    "Poor": {
+      "days": 3,
+      "percentage": 0.2
+    }
+  }
+}

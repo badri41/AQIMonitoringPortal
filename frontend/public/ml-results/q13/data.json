@@ -1,0 +1,17 @@
+{
+  "query": "Q13",
+  "title": "Rising PM2.5 but Stable AQI Cities",
+  "ml_type": "Divergence Analysis",
+  "results": [
+    {
+      "city": "Indore",
+      "pm25_increase": 3.8,
+      "aqi_change": 6.0
+    },
+    {
+      "city": "Ahmedabad",
+      "pm25_increase": 3.0,
+      "aqi_change": 3.6
+    }
+  ]
+}

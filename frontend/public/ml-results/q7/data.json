@@ -1,0 +1,12 @@
+{
+  "query": "Q7",
+  "title": "Monthly Average PM2.5 per City",
+  "ml_type": "LSTM Forecast",
+  "cities_forecasted": [
+    "Bangalore",
+    "Kolkata",
+    "Chandigarh",
+    "Chennai",
+    "Delhi"
+  ]
+}

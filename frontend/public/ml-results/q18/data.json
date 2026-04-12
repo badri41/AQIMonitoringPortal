@@ -1,0 +1,97 @@
+{
+  "query": "Q18",
+  "title": "AQI Change Before & After Rainfall",
+  "ml_type": "Seasonal Analysis",
+  "results": [
+    {
+      "city": "Bangalore",
+      "pre_rainfall": 87.3,
+      "post_rainfall": 83.3,
+      "cleansing_impact": 4.0
+    },
+    {
+      "city": "Guwahati",
+      "pre_rainfall": 102.8,
+      "post_rainfall": 110.8,
+      "cleansing_impact": -8.0
+    },
+    {
+      "city": "Hyderabad",
+      "pre_rainfall": 99.6,
+      "post_rainfall": 109.3,
+      "cleansing_impact": -9.7
+    },
+    {
+      "city": "Jaipur",
+      "pre_rainfall": 130.6,
+      "post_rainfall": 145.4,
+      "cleansing_impact": -14.8
+    },
+    {
+      "city": "Ahmedabad",
+      "pre_rainfall": 122.5,
+      "post_rainfall": 138.7,
+      "cleansing_impact": -16.3
+    },
+    {
+      "city": "Pune",
+      "pre_rainfall": 93.4,
+      "post_rainfall": 113.1,
+      "cleansing_impact": -19.7
+    },
+    {
+      "city": "Chennai",
+      "pre_rainfall": 73.0,
+      "post_rainfall": 95.2,
+      "cleansing_impact": -22.3
+    },
+    {
+      "city": "Indore",
+      "pre_rainfall": 102.9,
+      "post_rainfall": 126.3,
+      "cleansing_impact": -23.4
+    },
+    {
+      "city": "Chandigarh",
+      "pre_rainfall": 113.5,
+      "post_rainfall": 144.0,
+      "cleansing_impact": -30.5
+    },
+    {
+      "city": "Mumbai",
+      "pre_rainfall": 95.5,
+      "post_rainfall": 130.1,
+      "cleansing_impact": -34.6
+    },
+    {
+      "city": "Lucknow",
+      "pre_rainfall": 134.3,
+      "post_rainfall": 169.6,
+      "cleansing_impact": -35.4
+    },
+    {
+      "city": "Bhopal",
+      "pre_rainfall": 99.8,
+      "post_rainfall": 135.9,
+      "cleansing_impact": -36.1
+    },
+    {
+      "city": "Kolkata",
+      "pre_rainfall": 91.5,
+      "post_rainfall": 144.8,
+      "cleansing_impact": -53.3
+    },
+    {
+      "city": "Noida",
+      "pre_rainfall": 149.6,
+      "post_rainfall": 219.5,
+      "cleansing_impact": -69.9
+    },
+    {
+      "city": "Delhi",
+      "pre_rainfall": 154.1,
+      "post_rainfall": 231.6,
+      "cleansing_impact": -77.5
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+# React / Node Dependencies
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Backend
+backend/.env
+.env
+
+# Frontend Build
+frontend/dist/
+frontend/build/
+
+# Python / Machine Learning
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+.env_python/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# OS Generated Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE / Editor Files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

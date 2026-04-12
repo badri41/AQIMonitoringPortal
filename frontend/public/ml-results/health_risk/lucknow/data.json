@@ -1,0 +1,35 @@
+{
+  "city": "Lucknow",
+  "model": "Rule-Based (NAQI India)",
+  "health_score": 2.06,
+  "max_possible_score": 10,
+  "risk_tier": "Moderate Risk",
+  "advisory": "Sensitive groups (children, elderly, asthma) should limit prolonged outdoor activity.",
+  "total_days_analyzed": 1891,
+  "category_breakdown": {
+    "Good": {
+      "days": 17,
+      "percentage": 0.9
+    },
+    "Satisfactory": {
+      "days": 463,
+      "percentage": 24.5
+    },
+    "Moderate": {
+      "days": 1192,
+      "percentage": 63.0
+    },
+    "Poor": {
+      "days": 174,
+      "percentage": 9.2
+    },
+    "Very Poor": {
+      "days": 34,
+      "percentage": 1.8
+    },
+    "Severe": {
+      "days": 11,
+      "percentage": 0.6
+    }
+  }
+}

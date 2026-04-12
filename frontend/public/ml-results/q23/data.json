@@ -1,0 +1,97 @@
+{
+  "query": "Q23",
+  "title": "Seasonal Ozone (O3) Variation",
+  "ml_type": "Seasonal Analysis",
+  "results": [
+    {
+      "city": "Chandigarh",
+      "summer_o3": 21.67,
+      "winter_o3": 15.16,
+      "summer_spike": 6.51
+    },
+    {
+      "city": "Delhi",
+      "summer_o3": 20.03,
+      "winter_o3": 15.75,
+      "summer_spike": 4.28
+    },
+    {
+      "city": "Noida",
+      "summer_o3": 19.89,
+      "winter_o3": 16.26,
+      "summer_spike": 3.63
+    },
+    {
+      "city": "Guwahati",
+      "summer_o3": 12.11,
+      "winter_o3": 10.12,
+      "summer_spike": 1.99
+    },
+    {
+      "city": "Indore",
+      "summer_o3": 21.76,
+      "winter_o3": 19.77,
+      "summer_spike": 1.99
+    },
+    {
+      "city": "Lucknow",
+      "summer_o3": 16.63,
+      "winter_o3": 15.1,
+      "summer_spike": 1.53
+    },
+    {
+      "city": "Kolkata",
+      "summer_o3": 17.73,
+      "winter_o3": 16.95,
+      "summer_spike": 0.78
+    },
+    {
+      "city": "Jaipur",
+      "summer_o3": 20.58,
+      "winter_o3": 20.85,
+      "summer_spike": -0.28
+    },
+    {
+      "city": "Bhopal",
+      "summer_o3": 23.9,
+      "winter_o3": 24.32,
+      "summer_spike": -0.42
+    },
+    {
+      "city": "Chennai",
+      "summer_o3": 11.03,
+      "winter_o3": 11.5,
+      "summer_spike": -0.47
+    },
+    {
+      "city": "Pune",
+      "summer_o3": 23.24,
+      "winter_o3": 24.24,
+      "summer_spike": -1.0
+    },
+    {
+      "city": "Hyderabad",
+      "summer_o3": 10.51,
+      "winter_o3": 11.74,
+      "summer_spike": -1.22
+    },
+    {
+      "city": "Ahmedabad",
+      "summer_o3": 12.6,
+      "winter_o3": 13.9,
+      "summer_spike": -1.3
+    },
+    {
+      "city": "Bangalore",
+      "summer_o3": 12.51,
+      "winter_o3": 13.91,
+      "summer_spike": -1.39
+    },
+    {
+      "city": "Mumbai",
+      "summer_o3": 12.75,
+      "winter_o3": 19.27,
+      "summer_spike": -6.53
+    }
+  ]
+}

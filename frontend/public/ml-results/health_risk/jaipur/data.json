@@ -1,0 +1,31 @@
+{
+  "city": "Jaipur",
+  "model": "Rule-Based (NAQI India)",
+  "health_score": 1.76,
+  "max_possible_score": 10,
+  "risk_tier": "Moderate Risk",
+  "advisory": "Sensitive groups (children, elderly, asthma) should limit prolonged outdoor activity.",
+  "total_days_analyzed": 1892,
+  "category_breakdown": {
+    "Good": {
+      "days": 7,
+      "percentage": 0.4
+    },
+    "Satisfactory": {
+      "days": 511,
+      "percentage": 27.0
+    },
+    "Moderate": {
+      "days": 1342,
+      "percentage": 70.9
+    },
+    "Poor": {
+      "days": 31,
+      "percentage": 1.6
+    },
+    "Very Poor": {
+      "days": 1,
+      "percentage": 0.1
+    }
+  }
+}

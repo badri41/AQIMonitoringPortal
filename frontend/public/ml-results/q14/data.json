@@ -1,0 +1,97 @@
+{
+  "query": "Q14",
+  "title": "Weekday vs Weekend AQI",
+  "ml_type": "Pattern Analysis",
+  "results": [
+    {
+      "city": "Mumbai",
+      "weekday_avg": 111.8,
+      "weekend_avg": 109.1,
+      "difference": 2.7
+    },
+    {
+      "city": "Pune",
+      "weekday_avg": 109.7,
+      "weekend_avg": 107.4,
+      "difference": 2.3
+    },
+    {
+      "city": "Indore",
+      "weekday_avg": 112.5,
+      "weekend_avg": 110.3,
+      "difference": 2.2
+    },
+    {
+      "city": "Chennai",
+      "weekday_avg": 90.2,
+      "weekend_avg": 88.3,
+      "difference": 1.9
+    },
+    {
+      "city": "Chandigarh",
+      "weekday_avg": 126.5,
+      "weekend_avg": 124.8,
+      "difference": 1.8
+    },
+    {
+      "city": "Guwahati",
+      "weekday_avg": 117.3,
+      "weekend_avg": 118.9,
+      "difference": -1.6
+    },
+    {
+      "city": "Hyderabad",
+      "weekday_avg": 103.3,
+      "weekend_avg": 101.8,
+      "difference": 1.6
+    },
+    {
+      "city": "Bangalore",
+      "weekday_avg": 87.1,
+      "weekend_avg": 85.8,
+      "difference": 1.3
+    },
+    {
+      "city": "Bhopal",
+      "weekday_avg": 108.2,
+      "weekend_avg": 106.9,
+      "difference": 1.3
+    },
+    {
+      "city": "Delhi",
+      "weekday_avg": 174.0,
+      "weekend_avg": 173.0,
+      "difference": 1.0
+    },
+    {
+      "city": "Kolkata",
+      "weekday_avg": 123.6,
+      "weekend_avg": 124.4,
+      "difference": -0.8
+    },
+    {
+      "city": "Jaipur",
+      "weekday_avg": 124.9,
+      "weekend_avg": 124.5,
+      "difference": 0.4
+    },
+    {
+      "city": "Noida",
+      "weekday_avg": 165.2,
+      "weekend_avg": 165.6,
+      "difference": -0.4
+    },
+    {
+      "city": "Ahmedabad",
+      "weekday_avg": 122.7,
+      "weekend_avg": 122.5,
+      "difference": 0.1
+    },
+    {
+      "city": "Lucknow",
+      "weekday_avg": 143.2,
+      "weekend_avg": 143.2,
+      "difference": 0.0
+    }
+  ]
+}

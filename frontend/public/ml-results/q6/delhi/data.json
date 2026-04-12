@@ -1,0 +1,65 @@
+{
+  "city": "Delhi",
+  "metric": "AQI",
+  "model_used": "LSTM",
+  "forecast_days": 365,
+  "forecast_summary": {
+    "avg": 315.2,
+    "min": 151.0,
+    "max": 331.9
+  },
+  "forecast_monthly": [
+    {
+      "month": "Mar 2026",
+      "predicted_avg": 156.3
+    },
+    {
+      "month": "Apr 2026",
+      "predicted_avg": 209.7
+    },
+    {
+      "month": "May 2026",
+      "predicted_avg": 285.7
+    },
+    {
+      "month": "Jun 2026",
+      "predicted_avg": 319.6
+    },
+    {
+      "month": "Jul 2026",
+      "predicted_avg": 329.1
+    },
+    {
+      "month": "Aug 2026",
+      "predicted_avg": 331.3
+    },
+    {
+      "month": "Sep 2026",
+      "predicted_avg": 331.8
+    },
+    {
+      "month": "Oct 2026",
+      "predicted_avg": 331.9
+    },
+    {
+      "month": "Nov 2026",
+      "predicted_avg": 331.9
+    },
+    {
+      "month": "Dec 2026",
+      "predicted_avg": 331.9
+    },
+    {
+      "month": "Jan 2027",
+      "predicted_avg": 331.9
+    },
+    {
+      "month": "Feb 2027",
+      "predicted_avg": 331.9
+    },
+    {
+      "month": "Mar 2027",
+      "predicted_avg": 331.9
+    }
+  ]
+}
