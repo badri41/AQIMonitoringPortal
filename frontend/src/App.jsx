@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import FilterBar from "./components/FilterBar";
 import MetricTabs from "./components/MetricTabs";
 import AqiScale from "./components/AqiScale";
+import LiveAqi from "./components/LiveAqi";
 import TrendChart from "./components/TrendChart";
 import HistoricalChart from "./components/HistoricalChart";
 import StatsOverview from "./components/StatsOverview";
@@ -263,6 +264,7 @@ export default function App() {
                   </p>
                 </div>
 
+                <LiveAqi locationName={location?.name} />
                 <AqiScale currentAqi={currentAqi} />
                 <MetricTabs
                   activeMetric={activeMetric}
