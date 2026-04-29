@@ -23,14 +23,51 @@ This project aims to develop a web portal for exploring historical Air Quality I
 2. **Research Query Engine:** A built-in query system that pairs 30 complex analytical queries from a MariaDB database alongside pre-computed Machine Learning insights and data forecasts.
 
 ---
-##  Dataset Generation
 
-The data for this project has been fetched from the aqi.in website and the OpenAQ website using. First the data for all the cities was fetched from aqi.in and then the NULL values were filled using the data from the OpenAQ website. The data fetched for this project has been placed in the csv folder inside the data folder. All the data for individual cities have been placed inside teh individual_csv subfolder of the csv folder and the entire final dataset built using the data_handling.py has been saved in the final_merged_aqi_data.csv inside the merged subfolder of the csv folder. These data are already available and if it is needed to fetch the data again, the process is explained below:
-For the datahanlding part:
-  * Login into the OpenAQ website 
-  * Generate an API key from there
-  * Copy and paste the API key inplace of "YOUR_API_KEY" in 7th line of data_handling.py
-## 🧩 2. System Architecture
+## 📥 2. Data Collection & Dataset Generation
+
+### 📊 Dataset Overview
+The data for this project has been fetched from the aqi.in website and the OpenAQ website. First the data for all the cities was fetched from aqi.in and then the NULL values were filled using the data from the OpenAQ website. The data fetched for this project has been placed in the csv folder inside the data folder. All the data for individual cities have been placed inside the individual_csv subfolder of the csv folder and the entire final dataset built using the data_handling.py has been saved in the final_merged_aqi_data.csv inside the merged subfolder of the csv folder. These data are already available and if it is needed to fetch the data again, the process is explained below.
+
+### 🔑 Generating the Authorization Token
+1. Open your browser and navigate to: https://www.aqi.in
+2. Open Developer Tools by pressing F12 (or right-click → Inspect).
+3. Go to the Network tab.
+4. Refresh the page or click on any city to trigger API requests.
+5. In the Network panel, locate a request named: `getAqiCalender`
+6. Click on this request and open the Headers section.
+7. Under Request Headers, find: `Authorization: bearer <token>`
+8. Copy only the token string (exclude the word bearer).
+
+### ▶️ Running the Data Extraction Script
+
+After obtaining the token, navigate to the root directory of the project and execute the following command:
+
+```bash
+python data/scripts/fetch_aqi_data.py --city "CityName" --slug "state/city-slug" --token "YOUR_TOKEN"
+```
+
+**Example:**
+```bash
+python data/scripts/fetch_aqi_data.py --city "Hyderabad" --slug "india/telangana/hyderabad" --token "YOUR_TOKEN"
+```
+
+### 🛠️ Data Handling with OpenAQ
+
+To fill NULL values in the collected data using the OpenAQ API:
+
+1. Login into the OpenAQ website
+2. Generate an API key from there
+3. Copy and paste the API key in place of `"YOUR_API_KEY"` in line 7 of `data_handling.py`
+
+### ⚠️ Important Notes
+* The authorization token is session-based and may expire. If a 401 Unauthorized error occurs, regenerate the token using the above steps.
+* Ensure that the correct city slug is provided; otherwise, the API will return empty or invalid data.
+* A delay is intentionally added between API requests to avoid rate limiting.
+
+---
+
+## 🧩 3. System Architecture
 
 ### Frontend (React + Vite)
 * Built using React.js for extremely fast UI updates.
@@ -52,13 +89,13 @@ For the datahanlding part:
 
 ---
 
-## 🌆 3. Cities Covered
+## 🌆 4. Cities Covered
 
 Delhi, Mumbai, Kolkata, Chennai, Bengaluru, Hyderabad, Ahmedabad, Pune, Jaipur, Lucknow, Chandigarh, Bhopal, Indore, Noida, Guwahati
 
 ---
 
-## 🚀 4. Full System Setup & Execution Guide
+## 🚀 5. Full System Setup & Execution Guide
 
 Follow these steps exactly in order to launch the full system locally. 
 
