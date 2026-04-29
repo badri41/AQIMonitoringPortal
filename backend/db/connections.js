@@ -1,4 +1,5 @@
 const mariadb = require("mariadb");
+const queryCache = require("./queryCache");
 
 const pool = mariadb.createPool({
   host: process.env.DB_HOST || "127.0.0.1",
@@ -23,6 +24,23 @@ async function executeQuery(sql, params = []) {
   }
 }
 
+async function executeCachedQuery(sql, params = [], ttlMs = 10 * 60 * 1000) {
+  const cacheKey = queryCache.generateKey(sql, params);
+  
+  const cachedResult = queryCache.get(cacheKey);
+  if (cachedResult) {
+      return cachedResult;
+  }
+
+  const result = await executeQuery(sql, params);
+
+  if (result) {
+      queryCache.set(cacheKey, result, ttlMs);
+  }
+
+  return result;
+}
+
 async function closePool() {
   await pool.end();
 }
@@ -30,5 +48,6 @@ async function closePool() {
 module.exports = {
   pool,
   executeQuery,
+  executeCachedQuery,
   closePool,
 };
