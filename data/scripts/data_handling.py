@@ -19,7 +19,8 @@ CITY_COORDS = {
     "jaipur": "26.9124,75.7873",
     "indore": "22.7196,75.8577",
     "hyderabad": "17.3850,78.4867",
-    "guwahati": "26.1445,91.7362"
+    "guwahati": "26.1445,91.7362",
+    "ahmedabad": "23.0225,72.5714"
 }
 
 RADIUS_METERS = 25000
