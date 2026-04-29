@@ -1,4 +1,4 @@
-const { executeQuery } = require("../db/connections");
+const { executeQuery, executeCachedQuery } = require("../db/connections");
 
 const GET_DAILY_BY_CITY_RANGE_QUERY = `
   SELECT date, aqi_daily AS avgAqi, pm25 AS avgPm25, pm10 AS avgPm10
@@ -109,15 +109,25 @@ LIMIT 15;`;
 // -- Which state has shown the most improvement in average AQI over the last 3 years? 
 // -- ➡ Use: yearly aggregation + difference 
 // -- ➡ Insight: policy effectiveness
-
-const Q2 = `WITH yearly_avg AS (
-    SELECT 
-        c.state,
-        YEAR(a.date) AS year,
-        AVG(a.aqi_daily) AS avg_aqi
-    FROM aqi_data a
-    JOIN cities c ON a.city_id = c.city_id
-    GROUP BY c.state, YEAR(a.date)
+// We will first GROUP BY city_id, YEAR(date) the aqi_data table:
+// This will reduce the number of rows from 28K to ~75. This will help while joining with cities table
+const Q2 = `WITH city_yearly AS (
+       SELECT 
+           city_id,
+           YEAR(date) AS year,
+           SUM(aqi_daily) AS sum_aqi,
+           COUNT(aqi_daily) AS count_aqi
+       FROM aqi_data
+       GROUP BY city_id, YEAR(date) 
+),
+state_yearly AS (
+       SELECT 
+           c1.state,
+           c2.year,
+           SUM(c2.sum_aqi) / SUM(c2.count_aqi) AS avg_aqi
+       FROM city_yearly c2
+       JOIN cities c1 ON c2.city_id = c1.city_id
+       GROUP BY c1.state, c2.year
 ),
 
 ranked AS (
@@ -126,9 +136,8 @@ ranked AS (
         year,
         avg_aqi,
         ROW_NUMBER() OVER (PARTITION BY state ORDER BY year DESC) AS rn
-    FROM yearly_avg
+    FROM state_yearly
 ),
-
 comparison AS (
     SELECT 
         s1.state,
@@ -141,7 +150,6 @@ comparison AS (
     WHERE s1.rn = 1   -- latest year
       AND s3.rn = 3   -- 3rd latest year
 )
-
 SELECT *
 FROM comparison
 ORDER BY improvement DESC
@@ -189,36 +197,40 @@ ORDER BY c.city_name, a.date;
 // -- ➡ Insight: benchmark cities 
 const Q5 = `WITH yearly_avg AS (
     SELECT 
-        c.city_name,
-        YEAR(a.date) AS year,
-        AVG(a.aqi_daily) AS avg_aqi
-    FROM aqi_data a
-    JOIN cities c ON a.city_id = c.city_id
-    GROUP BY c.city_name, YEAR(a.date)
+        city_id,
+        YEAR(date) AS year,
+        AVG(aqi_daily) AS avg_aqi
+    FROM aqi_data
+    GROUP BY city_id, YEAR(date)
 )
 
-SELECT city_name
-FROM yearly_avg
-GROUP BY city_name
-HAVING MAX(avg_aqi) <=150;
+SELECT c.city_name
+FROM yearly_avg y
+JOIN cities c ON y.city_id = c.city_id
+GROUP BY y.city_id, c.city_name
+HAVING MAX(y.avg_aqi) <= 150;
 `;
 // -- Which cities have the highest number of "Severe" or "Very Poor" AQI days annually? 
 // -- ➡ Use: category count grouping 
 // -- ➡ Insight: pollution hotspots 
 
-const Q4 = `SELECT *
+const Q4 = `SELECT 
+    c.city_name,
+    t.year,
+    t.very_poor_days,
+    t.severe_days
 FROM (
     SELECT 
-        c.city_name,
-        YEAR(a.date) AS year,
-        SUM(CASE WHEN a.aqi_daily BETWEEN 401 AND 500 THEN 1 ELSE 0 END) AS very_poor_days,
-        SUM(CASE WHEN a.aqi_daily >= 501 THEN 1 ELSE 0 END) AS severe_days
-    FROM aqi_data a
-    JOIN cities c ON a.city_id = c.city_id
-    GROUP BY c.city_name, YEAR(a.date)
+        city_id,
+        YEAR(date) AS year,
+        SUM(CASE WHEN aqi_daily BETWEEN 401 AND 500 THEN 1 ELSE 0 END) AS very_poor_days,
+        SUM(CASE WHEN aqi_daily >= 501 THEN 1 ELSE 0 END) AS severe_days
+    FROM aqi_data
+    GROUP BY city_id, YEAR(date)
 ) t
-WHERE (very_poor_days + severe_days) > 0
-ORDER BY (very_poor_days + severe_days) DESC;`;
+JOIN cities c ON t.city_id = c.city_id
+WHERE (t.very_poor_days + t.severe_days) > 0
+ORDER BY (t.very_poor_days + t.severe_days) DESC;`;
 
 // -- What is the monthly average AQI for each city over the last 5 years? 
 // -- ➡ Use: GROUP BY month, city 
@@ -226,19 +238,23 @@ ORDER BY (very_poor_days + severe_days) DESC;`;
 
 const Q6 = `SELECT 
     c.city_name,
-    YEAR(a.date) AS year,
-    MONTH(a.date) AS month,
-    ROUND(AVG(a.aqi_daily), 2) AS avg_monthly_aqi
-FROM aqi_data a
-JOIN cities c ON a.city_id = c.city_id
-GROUP BY 
-    c.city_name,
-    YEAR(a.date),
-    MONTH(a.date)
+    agg.year,
+    agg.month,
+    agg.avg_monthly_aqi
+FROM (
+    SELECT 
+        city_id,
+        YEAR(date) AS year,
+        MONTH(date) AS month,
+        ROUND(AVG(aqi_daily), 2) AS avg_monthly_aqi
+    FROM aqi_data
+    GROUP BY city_id, YEAR(date), MONTH(date)
+) agg
+JOIN cities c ON agg.city_id = c.city_id
 ORDER BY 
     c.city_name,
-    year,
-    month;
+    agg.year,
+    agg.month;
 `;
 
 // What is the monthly average PM2.5 level for each city? 
@@ -247,19 +263,23 @@ ORDER BY
 
 const Q7 = `SELECT 
     c.city_name,
-    YEAR(a.date) AS year,
-    MONTH(a.date) AS month,
-    ROUND(AVG(a.pm25), 2) AS avg_pm25
-FROM aqi_data a
-JOIN cities c ON a.city_id = c.city_id
-GROUP BY 
-    c.city_name,
-    YEAR(a.date),
-    MONTH(a.date)
+    agg.year,
+    agg.month,
+    agg.avg_pm25
+FROM (
+    SELECT 
+        city_id,
+        YEAR(date) AS year,
+        MONTH(date) AS month,
+        ROUND(AVG(pm25), 2) AS avg_pm25
+    FROM aqi_data
+    GROUP BY city_id, YEAR(date), MONTH(date)
+) agg
+JOIN cities c ON agg.city_id = c.city_id
 ORDER BY 
     c.city_name,
-    year,
-    month;
+    agg.year,
+    agg.month;
 `;
 
 // -- What is the yearly growth or decline rate of AQI in each city? 
@@ -269,209 +289,248 @@ ORDER BY
 
 const Q8 = `WITH yearly_avg AS (
     SELECT 
-        c.city_name,
-        YEAR(a.date) AS year,
-        AVG(a.aqi_daily) AS avg_aqi
-    FROM aqi_data a
-    JOIN cities c ON a.city_id = c.city_id
-    GROUP BY c.city_name, YEAR(a.date)
+        city_id,
+        YEAR(date) AS year,
+        AVG(aqi_daily) AS avg_aqi
+    FROM aqi_data
+    GROUP BY city_id, YEAR(date)
 ),
-
 with_lag AS (
     SELECT 
-        city_name,
+        city_id,
         year,
         avg_aqi,
-        LAG(avg_aqi) OVER (PARTITION BY city_name ORDER BY year) AS prev_year_aqi
+        LAG(avg_aqi) OVER (PARTITION BY city_id ORDER BY year) AS prev_year_aqi
     FROM yearly_avg
 )
-
 SELECT 
-    city_name,
-    year,
-    ROUND(avg_aqi, 2) AS current_avg_aqi,
-    ROUND(prev_year_aqi, 2) AS prev_year_aqi,
+    c.city_name,
+    w.year,
+    ROUND(w.avg_aqi, 2) AS current_avg_aqi,
+    ROUND(w.prev_year_aqi, 2) AS prev_year_aqi,
     ROUND(
-        (avg_aqi - prev_year_aqi) / prev_year_aqi * 100,
+        (w.avg_aqi - w.prev_year_aqi) / w.prev_year_aqi * 100,
         2
     ) AS growth_rate_percent
-FROM with_lag
-WHERE prev_year_aqi IS NOT NULL
-ORDER BY city_name, year;
+FROM with_lag w
+JOIN cities c ON w.city_id = c.city_id
+WHERE w.prev_year_aqi IS NOT NULL
+ORDER BY c.city_name, w.year;
 `;
 
 // Which month has the worst air quality (highest avg AQI) each year? 
 // ➡ Use: MAX over grouped data 
 const Q9 = `WITH monthly_avg AS (
     SELECT 
-        YEAR(a.date) AS year,
-        MONTH(a.date) AS month,
-        AVG(a.aqi_daily) AS avg_aqi
-    FROM aqi_data a
-    GROUP BY 
-        YEAR(a.date),
-        MONTH(a.date)
+        YEAR(date) AS year,
+        MONTH(date) AS month,
+        AVG(aqi_daily) AS avg_aqi
+    FROM aqi_data
+    GROUP BY YEAR(date), MONTH(date)
 ),
-
 ranked AS (
     SELECT 
         year,
         month,
         avg_aqi,
-        ROW_NUMBER() OVER (
-            PARTITION BY year 
-            ORDER BY avg_aqi DESC
-        ) AS rn
+        ROW_NUMBER() OVER (PARTITION BY year ORDER BY avg_aqi DESC) AS rn
     FROM monthly_avg
 )
-
 SELECT 
     year,
     month,
     ROUND(avg_aqi, 2) AS worst_avg_aqi
 FROM ranked
 WHERE rn = 1
-ORDER BY year;
-
-
-SELECT 
-    c.city_name,
-    CASE 
-        WHEN MONTH(a.date) IN (12, 1, 2) THEN 'Winter'
-        WHEN MONTH(a.date) IN (4, 5, 6) THEN 'Summer'
-    END AS season,
-    ROUND(AVG(a.pm25), 2) AS avg_pm25
-FROM aqi_data a
-JOIN cities c ON a.city_id = c.city_id
-WHERE c.city_name IN ('Delhi', 'Noida', 'Lucknow', 'Chandigarh', 'Jaipur')
-AND MONTH(a.date) IN (12, 1, 2, 4, 5, 6)
-GROUP BY 
-    c.city_name,
-    season
-ORDER BY 
-    c.city_name,
-    season;`;
+ORDER BY year;`;
 
 // How do PM2.5 levels fluctuate between summer and winter months in Northern India? 
 // ➡ Use: CASE (season classification)
 
-const Q10 = `SELECT 
-    c.city_name,
-    CASE 
-        WHEN MONTH(a.date) IN (12, 1, 2) THEN 'Winter'
-        WHEN MONTH(a.date) IN (4, 5, 6) THEN 'Summer'
-    END AS season,
-    ROUND(AVG(a.pm25), 2) AS avg_pm25
-FROM aqi_data a
-JOIN cities c ON a.city_id = c.city_id
-WHERE c.city_name IN ('Delhi', 'Noida', 'Lucknow', 'Chandigarh', 'Jaipur')
-AND MONTH(a.date) IN (12, 1, 2, 4, 5, 6)
-GROUP BY 
-    c.city_name,
-    season
-ORDER BY 
-    c.city_name,
-    season;
+// const Q10 = `SELECT 
+//     c.city_name,
+//     CASE 
+//         WHEN MONTH(a.date) IN (12, 1, 2) THEN 'Winter'
+//         WHEN MONTH(a.date) IN (4, 5, 6) THEN 'Summer'
+//     END AS season,
+//     ROUND(AVG(a.pm25), 2) AS avg_pm25
+// FROM aqi_data a
+// JOIN cities c ON a.city_id = c.city_id
+// WHERE c.city_name IN ('Delhi', 'Noida', 'Lucknow', 'Chandigarh', 'Jaipur')
+// AND MONTH(a.date) IN (12, 1, 2, 4, 5, 6)
+// GROUP BY 
+//     c.city_name,
+//     season
+// ORDER BY 
+//     c.city_name,
+//     season;
+// `;
+
+const Q10 = `
+       WITH north AS (
+          SELECT city_id, city_name
+          FROM cities
+          WHERE region = 'North'
+),
+       seasonal_avg AS (
+          SELECT city_id,
+          CASE 
+             WHEN MONTH(date) IN (12,1,2) THEN 'Winter'
+             WHEN MONTH(date) IN (4,5,6) THEN 'Summer'
+          END AS season,
+          AVG(pm25) AS avg_pm25
+          FROM aqi_data
+          WHERE city_id IN (SELECT city_id FROM north)
+          AND MONTH(date) IN (12,1,2,4,5,6)
+          GROUP BY 
+             city_id,
+             CASE
+                WHEN MONTH(date) IN (12,2,1) THEN 'Winter'
+                WHEN MONTH(date) IN (4,5,6) THEN 'Summer'
+             END
+        )
+    SELECT 
+       t1.city_name,
+       s1.season,
+       ROUND(s1.avg_pm25,2) AS avg_pm25
+    FROM seasonal_avg s1
+    JOIN north t1 ON s1.city_id = t1.city_id
+    ORDER BY
+       t1.city_name,
+       s1.season;
 `;
-
-
 
 // Which pollutant (PM2.5 or PM10) dominates AQI in each city?
 const Q11 = `
 SELECT 
     c.city_name,
-
-    (
-        (AVG(a.pm25 * a.aqi_daily) - AVG(a.pm25) * AVG(a.aqi_daily)) /
-        (STDDEV(a.pm25) * STDDEV(a.aqi_daily))
-    ) AS corr_pm25,
-
-    (
-        (AVG(a.pm10 * a.aqi_daily) - AVG(a.pm10) * AVG(a.aqi_daily)) /
-        (STDDEV(a.pm10) * STDDEV(a.aqi_daily))
-    ) AS corr_pm10,
-
-    CASE
-        WHEN 
-            (
-                (AVG(a.pm25 * a.aqi_daily) - AVG(a.pm25) * AVG(a.aqi_daily)) /
-                (STDDEV(a.pm25) * STDDEV(a.aqi_daily))
-            )
-            >
-            (
-                (AVG(a.pm10 * a.aqi_daily) - AVG(a.pm10) * AVG(a.aqi_daily)) /
-                (STDDEV(a.pm10) * STDDEV(a.aqi_daily))
-            )
-        THEN 'PM2.5 dominates AQI'
-
-        WHEN 
-            (
-                (AVG(a.pm25 * a.aqi_daily) - AVG(a.pm25) * AVG(a.aqi_daily)) /
-                (STDDEV(a.pm25) * STDDEV(a.aqi_daily))
-            )
-            <
-            (
-                (AVG(a.pm10 * a.aqi_daily) - AVG(a.pm10) * AVG(a.aqi_daily)) /
-                (STDDEV(a.pm10) * STDDEV(a.aqi_daily))
-            )
-        THEN 'PM10 dominates AQI'
-
-        ELSE 'Equal influence'
-    END AS dominant_pollutant
-
-FROM aqi_data a
-JOIN cities c 
-    ON a.city_id = c.city_id
-GROUP BY c.city_name;
+    agg.corr_pm25,
+    agg.corr_pm10,
+    agg.dominant_pollutant
+FROM (
+    SELECT 
+        city_id,
+        (
+            (AVG(pm25 * aqi_daily) - AVG(pm25) * AVG(aqi_daily)) /
+            (STDDEV(pm25) * STDDEV(aqi_daily))
+        ) AS corr_pm25,
+        (
+            (AVG(pm10 * aqi_daily) - AVG(pm10) * AVG(aqi_daily)) /
+            (STDDEV(pm10) * STDDEV(aqi_daily))
+        ) AS corr_pm10,
+        CASE
+            WHEN 
+                (
+                    (AVG(pm25 * aqi_daily) - AVG(pm25) * AVG(aqi_daily)) /
+                    (STDDEV(pm25) * STDDEV(aqi_daily))
+                )
+                >
+                (
+                    (AVG(pm10 * aqi_daily) - AVG(pm10) * AVG(aqi_daily)) /
+                    (STDDEV(pm10) * STDDEV(aqi_daily))
+                )
+            THEN 'PM2.5 dominates AQI'
+            WHEN 
+                (
+                    (AVG(pm25 * aqi_daily) - AVG(pm25) * AVG(aqi_daily)) /
+                    (STDDEV(pm25) * STDDEV(aqi_daily))
+                )
+                <
+                (
+                    (AVG(pm10 * aqi_daily) - AVG(pm10) * AVG(aqi_daily)) /
+                    (STDDEV(pm10) * STDDEV(aqi_daily))
+                )
+            THEN 'PM10 dominates AQI'
+            ELSE 'Equal influence'
+        END AS dominant_pollutant
+    FROM aqi_data
+    GROUP BY city_id
+) AS agg
+JOIN cities c ON agg.city_id = c.city_id
+ORDER BY c.city_name;
 `;
 
 //What is the correlation between PM2.5 and overall AQI across cities?
-const Q12=`
+const Q12 = `
 SELECT 
     c.city_name,
-    (
-        (AVG(a.pm25 * a.aqi_daily) - AVG(a.pm25) * AVG(a.aqi_daily)) /
-        NULLIF(STDDEV(a.pm25) * STDDEV(a.aqi_daily), 0)
-    ) AS corr_pm25_aqi
-FROM aqi_data a
+    agg.corr_pm25_aqi
+FROM (
+    SELECT 
+        city_id,
+        (
+            (AVG(pm25 * aqi_daily) - AVG(pm25) * AVG(aqi_daily)) /
+            NULLIF(STDDEV(pm25) * STDDEV(aqi_daily), 0)
+        ) AS corr_pm25_aqi
+    FROM aqi_data
+    GROUP BY city_id
+) AS agg
 JOIN cities c 
-    ON a.city_id = c.city_id
-GROUP BY c.city_name;
+    ON agg.city_id = c.city_id
+ORDER BY c.city_name;
 ` ;
 
 //Which cities show increasing PM2.5 trends but stable overall AQI?
 const Q13 = `
+WITH DateRange AS (
+    -- CTE 1: Calculate the exact midpoint only ONCE
+    SELECT 
+        MIN(date) + INTERVAL (DATEDIFF(MAX(date), MIN(date)) / 2) DAY AS midpoint
+    FROM 
+        aqi_data
+),
+CityTrends AS (
+    -- CTE 2: Early aggregation on integers, using the midpoint
+    SELECT 
+        a.city_id,
+        AVG(CASE WHEN a.date >= d.midpoint THEN a.pm25 END) - 
+        AVG(CASE WHEN a.date < d.midpoint THEN a.pm25 END) AS pm25_diff,
+        
+        AVG(CASE WHEN a.date >= d.midpoint THEN a.aqi_daily END) - 
+        AVG(CASE WHEN a.date < d.midpoint THEN a.aqi_daily END) AS aqi_diff
+    FROM 
+        aqi_data a
+    CROSS JOIN 
+        DateRange d
+    GROUP BY 
+        a.city_id
+    HAVING 
+        pm25_diff > 0 
+        AND ABS(aqi_diff) < 10
+)
+-- Final Query: Only join the matching, pre-calculated rows to the text table
 SELECT 
     c.city_name,
-    AVG(CASE WHEN a.date >= (SELECT MIN(date) + INTERVAL (DATEDIFF(MAX(date), MIN(date)) / 2) DAY FROM aqi_data) 
-             THEN a.pm25 ELSE NULL END) -
-    AVG(CASE WHEN a.date < (SELECT MIN(date) + INTERVAL (DATEDIFF(MAX(date), MIN(date)) / 2) DAY FROM aqi_data) 
-             THEN a.pm25 ELSE NULL END) AS pm25_diff,
-             
-    AVG(CASE WHEN a.date >= (SELECT MIN(date) + INTERVAL (DATEDIFF(MAX(date), MIN(date)) / 2) DAY FROM aqi_data) 
-             THEN a.aqi_daily ELSE NULL END) -
-    AVG(CASE WHEN a.date < (SELECT MIN(date) + INTERVAL (DATEDIFF(MAX(date), MIN(date)) / 2) DAY FROM aqi_data) 
-             THEN a.aqi_daily ELSE NULL END) AS aqi_diff
-FROM aqi_data a
-JOIN cities c ON a.city_id = c.city_id
-GROUP BY c.city_name
-HAVING pm25_diff > 0           
-   AND ABS(aqi_diff) < 10    
-ORDER BY pm25_diff DESC;
+    ROUND(ct.pm25_diff, 2) AS pm25_diff,
+    ROUND(ct.aqi_diff, 2) AS aqi_diff
+FROM 
+    cities c
+JOIN 
+    CityTrends ct ON c.city_id = ct.city_id
+ORDER BY 
+    ct.pm25_diff DESC;
 `;
 
 //What is the average AQI during weekends vs weekdays in each city?
 const Q14 = `
+WITH cityAvg AS (
 SELECT 
-    c.city_name,
-    AVG(CASE WHEN DAYOFWEEK(a.date) BETWEEN 2 AND 6 THEN a.aqi_daily END) AS avg_weekday_aqi,
-    AVG(CASE WHEN DAYOFWEEK(a.date) IN (1, 7) THEN a.aqi_daily END) AS avg_weekend_aqi
+    city_id,
+    AVG(CASE WHEN DAYOFWEEK(date) BETWEEN 2 AND 6 THEN aqi_daily END) AS avg_weekday_aqi,
+    AVG(CASE WHEN DAYOFWEEK(date) IN (1, 7) THEN aqi_daily END) AS avg_weekend_aqi
 FROM 
+    aqi_data
+GROUP BY
+    city_id
+)
+SELECT
+    c.city_name,
+    c1.avg_weekday_aqi,
+    c1.avg_weekend_aqi
+FROM
     cities c
 JOIN 
-    aqi_data a ON c.city_id = a.city_id
-GROUP BY 
-    c.city_name
+    cityAvg c1 ON c.city_id = c1.city_id
 ORDER BY 
     c.city_name;
 `;
@@ -504,6 +563,7 @@ ORDER BY
 `;
 
 //Which cities have the most unpredictable AQI patterns?
+//Which cities have the most unpredictable AQI patterns?
 const Q16 = `
 SELECT 
     c.city_name,
@@ -517,7 +577,6 @@ GROUP BY
 ORDER BY 
     aqi_volatility_score DESC;
 `;
-
 //What is the average duration (in days) of continuous polluted air spells (AQI > 200)?
 const Q17 = `
 WITH BadAirDays AS (
@@ -559,23 +618,25 @@ ORDER BY
 
 //How does AQI change before and after rainfall events?
 const Q18 = `
+WITH CitySeasonalAQI AS (
+    SELECT 
+        city_id,
+        AVG(CASE WHEN MONTH(date) IN (4, 5) THEN aqi_daily END) AS raw_pre_rain_aqi,
+        AVG(CASE WHEN MONTH(date) IN (10, 11) THEN aqi_daily END) AS raw_post_rain_aqi
+    FROM 
+        aqi_data
+    GROUP BY 
+        city_id
+)
 SELECT 
     c.city_name,
-  
-    ROUND(AVG(CASE WHEN MONTH(a.date) IN (4, 5) THEN a.aqi_daily END), 1) AS pre_rainfall_aqi,
-    
-    ROUND(AVG(CASE WHEN MONTH(a.date) IN (10, 11) THEN a.aqi_daily END), 1) AS post_rainfall_aqi,
-    
-    ROUND(
-        AVG(CASE WHEN MONTH(a.date) IN (4, 5) THEN a.aqi_daily END) - 
-        AVG(CASE WHEN MONTH(a.date) IN (10, 11) THEN a.aqi_daily END), 
-    1) AS cleansing_impact_drop
+    ROUND(c1.raw_pre_rain_aqi, 1) AS pre_rainfall_aqi,
+    ROUND(c1.raw_post_rain_aqi, 1) AS post_rainfall_aqi,
+    ROUND(c1.raw_pre_rain_aqi - c1.raw_post_rain_aqi, 1) AS cleansing_impact_drop
 FROM 
     cities c
 JOIN 
-    aqi_data a ON c.city_id = a.city_id
-GROUP BY 
-    c.city_name
+    CitySeasonalAQI c1 ON c.city_id = c1.city_id
 ORDER BY 
     cleansing_impact_drop DESC;
 `;
@@ -623,7 +684,6 @@ GROUP BY
 ORDER BY 
     avg_recovery_days ASC;
 `;
-
 //How do pollution profiles (Gas vs. Particulate) differ across macro-regions?
 const Q20 = `
 SELECT 
@@ -665,6 +725,8 @@ WITH RegionalDaily AS (
         aqi_data a ON c.city_id = a.city_id
     WHERE 
         a.pm25 IS NOT NULL
+        -- Pre-filter to only the months needed (including Aug for the 7-day lookback)
+        AND MONTH(a.date) BETWEEN 8 AND 12 
     GROUP BY 
         c.region, 
         a.date
@@ -695,7 +757,6 @@ WinterOnset AS (
         region, 
         YEAR(date)
 )
-
 SELECT 
     onset_year,
     region,
@@ -706,7 +767,6 @@ ORDER BY
     onset_year DESC, 
     first_spike_date ASC;
 `;
-
 //What are the 90th and 95th percentile pollution levels for each state?
 const Q22 = `
 SELECT DISTINCT
@@ -726,51 +786,61 @@ ORDER BY
 
 //How does ground-level Ozone (O3) vary across seasons, specifically comparing peak summer to winter months?
 const Q23 = `
+WITH SeasonalOzone AS (
+    SELECT 
+        city_id,
+        AVG(CASE WHEN MONTH(date) IN (3, 4, 5, 6) THEN o3 END) AS raw_summer_o3,
+        AVG(CASE WHEN MONTH(date) IN (11, 12, 1, 2) THEN o3 END) AS raw_winter_o3
+    FROM 
+        aqi_data
+    WHERE 
+        o3 IS NOT NULL
+    GROUP BY 
+        city_id
+)
 SELECT 
     c.city_name,
-    ROUND(AVG(CASE WHEN MONTH(a.date) IN (3, 4, 5, 6) THEN a.o3 END), 2) AS avg_summer_o3,
-    
-    ROUND(AVG(CASE WHEN MONTH(a.date) IN (11, 12, 1, 2) THEN a.o3 END), 2) AS avg_winter_o3,
-
-    ROUND(
-        AVG(CASE WHEN MONTH(a.date) IN (3, 4, 5, 6) THEN a.o3 END) - 
-        AVG(CASE WHEN MONTH(a.date) IN (11, 12, 1, 2) THEN a.o3 END), 
-    2) AS summer_spike_difference
+    ROUND(so.raw_summer_o3, 2) AS avg_summer_o3,
+    ROUND(so.raw_winter_o3, 2) AS avg_winter_o3,
+    ROUND(so.raw_summer_o3 - so.raw_winter_o3, 2) AS summer_spike_difference
 FROM 
     cities c
 JOIN 
-    aqi_data a ON c.city_id = a.city_id
-WHERE 
-    a.o3 IS NOT NULL 
-GROUP BY 
-    c.city_name
+    SeasonalOzone so ON c.city_id = so.city_id
 ORDER BY 
     summer_spike_difference DESC;
 `;
 
 //Which cities exhibit the highest ratio of NO2 to overall AQI, indicating heavy traffic pollution?
 const Q24 = `
+WITH CityNO2Stats AS (
+    SELECT 
+        city_id,
+        AVG(no2) AS raw_avg_no2,
+        AVG(aqi_daily) AS raw_avg_aqi
+    FROM 
+        aqi_data
+    WHERE 
+        no2 IS NOT NULL 
+        AND aqi_daily IS NOT NULL
+    GROUP BY 
+        city_id
+)
 SELECT 
     c.city_name,
-    ROUND(AVG(a.no2), 2) AS avg_no2,
-    ROUND(AVG(a.aqi_daily), 2) AS avg_overall_aqi,
-
-    ROUND(AVG(a.no2) / NULLIF(AVG(a.aqi_daily), 0), 4) AS traffic_pollution_ratio
+    ROUND(cns.raw_avg_no2, 2) AS avg_no2,
+    ROUND(cns.raw_avg_aqi, 2) AS avg_overall_aqi,
+    ROUND(cns.raw_avg_no2/NULLIF(cns.raw_avg_aqi, 0), 4) AS traffic_pollution_ratio
 FROM 
     cities c
 JOIN 
-    aqi_data a ON c.city_id = a.city_id
-WHERE 
-    a.no2 IS NOT NULL 
-    AND a.aqi_daily IS NOT NULL
-GROUP BY 
-    c.city_name
+    CityNO2Stats cns ON c.city_id = cns.city_id
 ORDER BY 
     traffic_pollution_ratio DESC;
 `;
 
 //What is the co-occurrence rate of CO and PM2.5 spikes during winter months?
-const Q25 =`
+const Q25 = `
 WITH WinterData AS (
     SELECT 
         city_id,
@@ -837,10 +907,10 @@ ORDER BY
     a.date DESC;
 `;
 
-// -- Which cities show the fastest AQI recovery after extreme pollution days? 
+// -- Which cities show the fastest AQI recovery after severe pollution days? 
 // -- ➡ Use: time-to-normal calculation 
 
-const Q27= `
+const Q27 = `
 WITH severe_days AS (
     SELECT 
         city_id,
@@ -877,7 +947,6 @@ JOIN cities c ON r.city_id = c.city_id
 GROUP BY c.city_name
 ORDER BY avg_recovery_time ASC;
 `;
-
 // --  How many days before severe AQI does PM2.5 cross critical levels?
 // -- ➡ Early warning signal
 
@@ -890,7 +959,7 @@ WITH severe_days AS (
 pre_spike AS (
     SELECT 
         s.city_id,
-        MIN(a.date) AS warning_date,
+        MAX(a.date) AS warning_date,
         s.date AS severe_date
     FROM severe_days s
     JOIN aqi_data a
@@ -913,16 +982,21 @@ ORDER BY avg_warning_days DESC;
 
 const Q29 = `SELECT 
     c.city_name,
-    ROUND(
-        AVG(CASE WHEN MONTH(a.date) IN (12,1,2) THEN a.aqi_daily END) -
-        AVG(CASE WHEN MONTH(a.date) IN (4,5,6) THEN a.aqi_daily END),
-        2
-    ) AS seasonal_drop
-FROM aqi_data a
-JOIN cities c ON a.city_id = c.city_id
-GROUP BY c.city_name
-ORDER BY seasonal_drop DESC;`;
-
+    ROUND(a.seasonal_drop, 2) AS seasonal_drop
+FROM 
+    cities c
+JOIN (
+    SELECT 
+        city_id,
+        AVG(CASE WHEN MONTH(date) IN (12,1,2) THEN aqi_daily END) -
+        AVG(CASE WHEN MONTH(date) IN (4,5,6) THEN aqi_daily END) AS seasonal_drop
+    FROM 
+        aqi_data
+    GROUP BY 
+        city_id
+) a ON c.city_id = a.city_id
+ORDER BY 
+    seasonal_drop DESC;`;
 // --  Do severe AQI days cluster together (burst analysis)?
 // -- ➡ Identify clustered extreme events
 // -- This will show the longest cluster per city.
@@ -961,187 +1035,187 @@ ORDER BY longest_cluster DESC;`;
 
 
 async function findDailyByCityAndRange(cityId, startDate, endDate) {
-  return executeQuery(GET_DAILY_BY_CITY_RANGE_QUERY, [cityId, startDate, endDate]);
+    return executeCachedQuery(GET_DAILY_BY_CITY_RANGE_QUERY, [cityId, startDate, endDate], 120000);
 }
 
 async function findOverviewStats() {
-  return executeQuery(GET_OVERVIEW_QUERY);
+    return executeCachedQuery(GET_OVERVIEW_QUERY, [], 120000);
 }
 
 async function findHistoricalByCityMonth(cityId, month) {
-  return executeQuery(GET_HISTORICAL_BY_CITY_MONTH_QUERY, [cityId, month]);
+    return executeCachedQuery(GET_HISTORICAL_BY_CITY_MONTH_QUERY, [cityId, month], 10 * 60 * 1000);
 }
 // Q1
 async function getLongestSevereStreak() {
-  return executeQuery(Q1);
+    return executeCachedQuery(Q1, [], 10 * 60 * 1000);
 }
 
 // Q2
 async function getStateImprovement() {
-  return executeQuery(Q2);
+    return executeCachedQuery(Q2, [], 10 * 60 * 1000);
 }
 
 // Q3
 async function getAQIAnomalies() {
-  return executeQuery(Q3);
+    return executeCachedQuery(Q3, [], 10 * 60 * 1000);
 }
 
 // Q4
 async function getPollutionHotspots() {
-  return executeQuery(Q4);
+    return executeCachedQuery(Q4, [], 10 * 60 * 1000);
 }
 
 // Q5
 async function getConsistentlyGoodCities() {
-  return executeQuery(Q5);
+    return executeCachedQuery(Q5, [], 10 * 60 * 1000);
 }
 
 // Q6
 async function getMonthlyAQI() {
-  return executeQuery(Q6);
+    return executeCachedQuery(Q6, [], 10 * 60 * 1000);
 }
 
 // Q7
 async function getMonthlyPM25() {
-  return executeQuery(Q7);
+    return executeCachedQuery(Q7, [], 10 * 60 * 1000);
 }
 
 // Q8
 async function getYearlyGrowth() {
-  return executeQuery(Q8);
+    return executeCachedQuery(Q8, [], 10 * 60 * 1000);
 }
 
 // Q9
 async function getWorstMonthPerYear() {
-  return executeQuery(Q9);
+    return executeCachedQuery(Q9, [], 10 * 60 * 1000);
 }
 
 // Q10
 async function getSeasonalPM25() {
-  return executeQuery(Q10);
+    return executeCachedQuery(Q10, [], 10 * 60 * 1000);
 }
 
 
 async function getDominantPollutant() {
-  return executeQuery(Q11);
+    return executeCachedQuery(Q11, [], 10 * 60 * 1000);
 }
 
 async function getPm25AqiCorrelation() {
-  return executeQuery(Q12);
+    return executeCachedQuery(Q12, [], 10 * 60 * 1000);
 }
 
 async function getHiddenPollutionRisk() {
-  return executeQuery(Q13);
+    return executeCachedQuery(Q13, [], 10 * 60 * 1000);
 }
 
 async function getWeekendVsWeekdayAQI() {
-  return executeQuery(Q14);
+    return executeCachedQuery(Q14, [], 10 * 60 * 1000);
 }
 
 async function getAqiVolatilityFrequency() {
-  return executeQuery(Q15);
+    return executeCachedQuery(Q15, [], 10 * 60 * 1000);
 }
 
 async function getUnpredictableCities() {
-  return executeQuery(Q16);
+    return executeCachedQuery(Q16, [], 10 * 60 * 1000);
 }
 
 async function getPollutedAirSpells() {
-  return executeQuery(Q17);
+    return executeCachedQuery(Q17, [], 10 * 60 * 1000);
 }
 
 async function getRainfallImpact() {
-  return executeQuery(Q18);
+    return executeCachedQuery(Q18, [], 10 * 60 * 1000);
 }
 
 async function getRecoverySpeed() {
-  return executeQuery(Q19);
+    return executeCachedQuery(Q19, [], 10 * 60 * 1000);
 }
 
 async function getRegionalPollutionProfile() {
-  return executeQuery(Q20);
+    return executeCachedQuery(Q20, [], 10 * 60 * 1000);
 }
 
 async function getWinterOnset() {
-  return executeQuery(Q21);
+    return executeCachedQuery(Q21, [], 10 * 60 * 1000);
 }
 
 async function getStatePercentiles() {
-  return executeQuery(Q22);
+    return executeCachedQuery(Q22, [], 10 * 60 * 1000);
 }
 
 async function getSeasonalOzoneVariation() {
-  return executeQuery(Q23);
+    return executeCachedQuery(Q23, [], 10 * 60 * 1000);
 }
 
 async function getTrafficPollution() {
-  return executeQuery(Q24);
+    return executeCachedQuery(Q24, [], 10 * 60 * 1000);
 }
 
 async function getCoPmCooccurrence() {
-  return executeQuery(Q25);
+    return executeCachedQuery(Q25, [], 10 * 60 * 1000);
 }
 
 async function getHiddenHazardDays() {
-  return executeQuery(Q26);
+    return executeCachedQuery(Q26, [], 10 * 60 * 1000);
 }
 
 // Q27
 async function getRecoveryTime() {
-  return executeQuery(Q27);
+    return executeCachedQuery(Q27, [], 10 * 60 * 1000);
 }
 
 // Q28
 async function getEarlyWarningSignal() {
-  return executeQuery(Q28);
+    return executeCachedQuery(Q28, [], 10 * 60 * 1000);
 }
 
 // Q29
 async function getSeasonalDrop() {
-  return executeQuery(Q29);
+    return executeCachedQuery(Q29, [], 10 * 60 * 1000);
 }
 
 // Q30
 async function getPollutionClusters() {
-  return executeQuery(Q30);
+    return executeCachedQuery(Q30, [], 10 * 60 * 1000);
 }
 
 /* ---------------- EXPORT ---------------- */
 
 module.exports = {
-  findDailyByCityAndRange,
-  findOverviewStats,
-  findHistoricalByCityMonth,
+    findDailyByCityAndRange,
+    findOverviewStats,
+    findHistoricalByCityMonth,
 
-  getLongestSevereStreak,
-  getStateImprovement,
-  getAQIAnomalies,
-  getPollutionHotspots,
-  getConsistentlyGoodCities,
-  getMonthlyAQI,
-  getMonthlyPM25,
-  getYearlyGrowth,
-  getWorstMonthPerYear,
-  getSeasonalPM25,
-  getRecoveryTime,
-  getEarlyWarningSignal,
-  getSeasonalDrop,
-  getPollutionClusters,
-  
-  getDominantPollutant,
-  getPm25AqiCorrelation,
-  getHiddenPollutionRisk,
-  getWeekendVsWeekdayAQI,
-  getAqiVolatilityFrequency,
-  getUnpredictableCities,
-  getPollutedAirSpells,
-  getRainfallImpact,
-  getRecoverySpeed,
-  getRegionalPollutionProfile,
-  getWinterOnset,
-  getStatePercentiles,
-  getSeasonalOzoneVariation,
-  getTrafficPollution,
-  getCoPmCooccurrence,
-  getHiddenHazardDays
+    getLongestSevereStreak,
+    getStateImprovement,
+    getAQIAnomalies,
+    getPollutionHotspots,
+    getConsistentlyGoodCities,
+    getMonthlyAQI,
+    getMonthlyPM25,
+    getYearlyGrowth,
+    getWorstMonthPerYear,
+    getSeasonalPM25,
+    getRecoveryTime,
+    getEarlyWarningSignal,
+    getSeasonalDrop,
+    getPollutionClusters,
+
+    getDominantPollutant,
+    getPm25AqiCorrelation,
+    getHiddenPollutionRisk,
+    getWeekendVsWeekdayAQI,
+    getAqiVolatilityFrequency,
+    getUnpredictableCities,
+    getPollutedAirSpells,
+    getRainfallImpact,
+    getRecoverySpeed,
+    getRegionalPollutionProfile,
+    getWinterOnset,
+    getStatePercentiles,
+    getSeasonalOzoneVariation,
+    getTrafficPollution,
+    getCoPmCooccurrence,
+    getHiddenHazardDays
 };
