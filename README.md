@@ -165,3 +165,156 @@ Follow these steps exactly in order to launch the full system locally.
 4. Access the web dashboard at `http://localhost:5173/`. 
 
 *(Toggle between the traditional Dashboard and the Research Query Engine from the top switch bar).*
+
+## 🗂️ 6. Complete Code Structure
+
+```text
+AQIMonitoringPortal/
+├── README.md
+├── backend/
+│   ├── .gitignore
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── server.js
+│   ├── controllers/
+│   │   ├── aqiController.js
+│   │   ├── citiesController.js
+│   │   └── healthController.js
+│   ├── db/
+│   │   ├── connections.js
+│   │   └── queryCache.js
+│   ├── queries/
+│   │   ├── aqiQueries.js
+│   │   └── citiesQueries.js
+│   └── routes/
+│       ├── aqiRoutes.js
+│       ├── chatRoutes.js
+│       ├── citiesRoutes.js
+│       ├── healthRoutes.js
+│       └── index.js
+├── data/
+│   ├── csv/
+│   │   ├── individual_csv/
+│   │   │   ├── ahmedabad_aqi_data_2021_2026.csv
+│   │   │   ├── bangalore_aqi_data_2021_2026.csv
+│   │   │   ├── bhopal_aqi_data_2021_2026.csv
+│   │   │   ├── chandigarh_aqi_data_2021_2026.csv
+│   │   │   ├── chennai_aqi_data_2021_2026.csv
+│   │   │   ├── guwahati_aqi_data_2021_2026.csv
+│   │   │   ├── hyderabad_aqi_data_2021_2026.csv
+│   │   │   ├── indore_aqi_data_2021_2026.csv
+│   │   │   ├── jaipur_aqi_data_2021_2026.csv
+│   │   │   ├── kolkata_aqi_data_2021_2026.csv
+│   │   │   ├── lucknow_aqi_data_2021_2026.csv
+│   │   │   ├── mumbai_aqi_data_2021_2026.csv
+│   │   │   ├── newdelhi_aqi_data_2021_2026.csv
+│   │   │   ├── noida_aqi_data_2021_2026.csv
+│   │   │   └── pune_aqi_data_2021_2026.csv
+│   │   └── merged/
+│   │       └── final_merged_aqi_data.csv
+│   └── scripts/
+│       ├── data_handling.py
+│       ├── debug_api.py
+│       └── fetch_aqi_data.py
+├── database/
+│   ├── schema.sql
+│   └── seed.sql
+├── docs/
+├── frontend/
+│   ├── eslint.config.js
+│   ├── index.html
+│   ├── package.json
+│   ├── vite.config.js
+│   ├── public/
+│   │   └── ml-results/
+│   │       ├── metadata.json
+│   │       ├── clustering/
+│   │       ├── health_risk/
+│   │       ├── q1/
+│   │       ├── q2/
+│   │       ├── q3/
+│   │       ├── q4/
+│   │       ├── q5/
+│   │       ├── q6/
+│   │       ├── q7/
+│   │       ├── q8/
+│   │       ├── q9/
+│   │       ├── q10/
+│   │       ├── q11/
+│   │       ├── q12/
+│   │       ├── q13/
+│   │       ├── q14/
+│   │       ├── q15/
+│   │       ├── q16/
+│   │       ├── q17/
+│   │       ├── q18/
+│   │       ├── q19/
+│   │       ├── q20/
+│   │       ├── q21/
+│   │       ├── q22/
+│   │       ├── q23/
+│   │       ├── q24/
+│   │       ├── q25/
+│   │       ├── q26/
+│   │       ├── q27/
+│   │       ├── q28/
+│   │       ├── q29/
+│   │       └── q30/
+│   └── src/
+│       ├── App.jsx
+│       ├── App.css
+│       ├── main.jsx
+│       ├── index.css
+│       ├── assets/
+│       ├── components/
+│       │   ├── AqiCluster.jsx
+│       │   ├── AqiDistribution.jsx
+│       │   ├── AqiDistribution.css
+│       │   ├── AqiLineChart.jsx
+│       │   ├── AqiLineChart.css
+│       │   ├── AqiScale.jsx
+│       │   ├── AqiScale.css
+│       │   ├── ChatBot.jsx
+│       │   ├── ChatBot.css
+│       │   ├── CityCompare.jsx
+│       │   ├── CityCompare.css
+│       │   ├── DayNightCards.jsx
+│       │   ├── DayNightCards.css
+│       │   ├── DeepDivePanel.jsx
+│       │   ├── DeepDivePanel.css
+│       │   ├── FilterBar.jsx
+│       │   ├── FilterBar.css
+│       │   ├── Header.jsx
+│       │   ├── Header.css
+│       │   ├── HistoricalChart.jsx
+│       │   ├── HistoricalChart.css
+│       │   ├── LiveAqi.jsx
+│       │   ├── LiveAqi.css
+│       │   ├── MetricTabs.jsx
+│       │   ├── MetricTabs.css
+│       │   ├── MLInsightsPanel.jsx
+│       │   ├── MLInsightsPanel.css
+│       │   ├── StatsOverview.jsx
+│       │   ├── StatsOverview.css
+│       │   ├── SummaryPanel.jsx
+│       │   ├── SummaryPanel.css
+│       │   ├── TrendChart.jsx
+│       │   └── TrendChart.css
+│       ├── context/
+│       ├── data/
+│       ├── services/
+│       └── utils/
+└── ml/
+   ├── config.py
+   ├── data_loader.py
+   ├── generate_all.py
+   ├── model.py
+   ├── plot_blueprint_q1_q30_dark.py
+   ├── requirements.txt
+   └── models/
+      ├── __init__.py
+      ├── anomaly.py
+      ├── clustering.py
+      ├── forecaster.py
+      └── health_risk.py
+```
